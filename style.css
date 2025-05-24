@@ -87,7 +87,7 @@ ul{
     .container {
         width: 96%;
         margin: 3vh auto;
-        min-height: 1200px;
+        min-height: 1350px;
     }
 
     .menu {
@@ -113,6 +113,9 @@ ul{
     }
 
     .notepad {
+        p{
+        margin-top: 5px;
+        }
         font-size: 18px;
         width: 98%;
     }
