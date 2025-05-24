@@ -33,13 +33,19 @@ ul{
         font-size: 20px;
     }
 }
+
+.rdp{
+    height: 5px;
+}
 .container{
-    min-height: 1385px;
+    min-height: 1px;
     margin: 10vh auto;
     background-color: #bebebf;
     width: 60%;
 
 }
+
+
 
 .menu{
     display: flex;
@@ -87,7 +93,7 @@ ul{
     .container {
         width: 96%;
         margin: 3vh auto;
-        min-height: 1350px;
+        min-height: 1px;
     }
 
     .titulo{
@@ -129,4 +135,9 @@ ul{
     .titulo p {
         font-size: 20px;
     }
+
+    .rdp{
+    height: 5px;
+}
+
 }
