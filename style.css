@@ -138,7 +138,10 @@ ul{
     .titulo p {
         font-size: 20px;
     }
-
+    ul{
+        display: flex;
+        overflow: hidden;
+    }
     .rdp{
     height: 5px;
 }
