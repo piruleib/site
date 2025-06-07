@@ -1,6 +1,6 @@
-@font-face{
+@font-face {
     font-family: Inter;
-    src: url('font/Inter.ttf')
+    src: url('font/Inter.ttf');
 }
 
 * {
@@ -12,67 +12,19 @@
 body {
     background-color: black;
     font-family: Inter;
+    color: white;
 }
 
-.info{
-    display: flex;
-    flex-direction: row;
-    margin: 30px;
-    height: 500px;
-}
-
-.txt{
-    width: 50%;
-}
-
-.txt, .imgm{
-    height: 500px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    p{
-        font-size: 20px;
-    }
-}
-.imgm{
-    width: 50%;
-    .imagem{
-        transform: scale(0.9);
-        border-radius: 20px;
-    }
-
-    .imagem2{
-        height: 350px;
-        border-radius: 20px;
-    }
-
-    .imagem3{
-        height: 350px;
-        border-radius: 20px;
-    }
-}
-
-h1, a, p{
+h1, a, p {
     color: white;
     text-decoration: none;
     text-align: center;
-}
-
-main{
-    margin-top: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
 header {
     height: 190px;
     display: flex;
     justify-content: center;
-    flex-direction: column;
     align-items: center;
 }
 
@@ -80,22 +32,70 @@ header {
     transform: scale(0.3);
 }
 
+main {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    .separador {
-        height: 1px;
-        width: 80%;
-        justify-content: center;
-        align-items: center;
-        display: flex;
-        background-color: rgb(53, 49, 49);
-    }
 }
 
-.link{
+.container .separador {
+    height: 1px;
+    width: 80%;
+    background-color: rgb(53, 49, 49);
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    margin: 30px;
+    height: 500px;
+}
+
+.txt, .imgm {
+    width: 50%;
+    height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+}
+
+.txt p {
+    font-size: 20px;
+}
+
+.imgm {
+    transition: 0.5s;
+}
+
+.imgm:hover {
+    transform: scale(0.95);
+}
+
+.imgm .imagem,
+.imgm .imagem2,
+.imgm .imagem3 {
+    max-width: 100%;
+    height: auto;
+    border-radius: 20px;
+}
+
+.imgm .imagem2,
+.imgm .imagem3 {
+    height: 350px;
+}
+
+.link {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -106,7 +106,32 @@ header {
     height: 400px;
 }
 
-button{
+.menu{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: white;
+    h1{
+        color: black;
+    }
+    width: 700px;
+}
+
+.conteudo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black;
+    color: white;
+    min-height: 200px;
+    width: 700px;
+    flex-direction: column;
+}
+
+button {
     height: 50px;
     width: 50%;
     font-size: 25px;
@@ -115,11 +140,11 @@ button{
     transition: 0.5s;
 }
 
-button:hover{
+button:hover {
     transform: scale(1.05);
 }
 
-footer{
+footer {
     margin: 30px;
     height: 30px;
     display: flex;
@@ -127,11 +152,79 @@ footer{
     flex-direction: column;
 }
 
-
-.imgm{
+.selected{
+    background-color: white;
+    height: 50px; width: 90px;
+    color: black; display: flex;
+    justify-content: center; 
+    align-items: center;
+}
+.ahover{
     transition: 0.5s;
+    height: 50px;
+    width: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.ahover:hover{
+    background-color: white;
+    color: black;
 }
 
-.imgm:hover{
-    transform: scale(1.1);
+/* responsividade yayy */
+
+@media (max-width: 768px) {
+    .info {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .txt, .imgm {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+    .txt p {
+        font-size: 16px;
+    }
+
+    .imgm .imagem2,
+    .imgm .imagem3 {
+        height: auto;
+        width: 90%;
+    }
+
+    button {
+        width: 80%;
+        font-size: 18px;
+    }
+
+    .link {
+        font-size: 18px;
+        height: auto;
+    }
+
+    #logo {
+        transform: scale(0.3);
+    }
+
+    .container .separador {
+        width: 90%;
+    }
+}
+
+.infoteam{
+    img{
+        border-radius: 10px;
+    }
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.profile{
+    display: flex;
+    flex-direction: column;
 }
