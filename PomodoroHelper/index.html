@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PomodoroHelper</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="images/logo.png" alt="">
+        </header>
+        <main>
+            <div class="timer">
+                <div class="buttons1">
+                    <button class="btn-selected">POMODORO</button>
+                    <button class="btn-not-selected">PAUSA CURTA</button>
+                    <button class="btn-not-selected">PAUSA LONGA</button>
+                </div>
+                <div class="timer-countdown">
+                    <span id="timerResult"></span>
+                </div>
+                <div class="buttons2">
+                    <button id="start" class="btn-start" onclick="timer()">INICIAR</button>
+                    <button id="stop" class="btn-selected" onclick="stop()">PARAR</button>
+                    <button id="restart" class="btn-not-selected" onclick="restart()">REINICIAR</button>
+
+                </div>
+            </div>
+            <div class="about">
+                <div class="text">
+                    <h1>O que é a "Técnica Pomodoro"?</h1>
+                    <p>A Técnica Pomodoro é um método de gestão de tempo criado por Francesco Cirillo no final dos anos 1980. A ideia é dividir o trabalho em blocos de tempo — geralmente de 25 minutos — chamados de pomodoros, seguidos por breves pausas. Após completar alguns ciclos, faz-se uma pausa mais longa. Esse método ajuda a aumentar a concentração, reduzir distrações e tornar o trabalho mais produtivo. A prática regular também melhora a percepção do tempo e promove um ritmo de trabalho mais sustentável.</p>
+                    <h1>Passos básicos da Técnica Pomodoro:</h1>
+                    <p>1 - Escolha uma tarefa.<br>2 - Trabalhe nela por 25 minutos (1 pomodoro).<br>3 - Faça uma pausa de 5 minutos.<br>4 - Repita o ciclo. Após 4 pomodoros, faça uma pausa mais longa (15 a 30 minutos).</p>
+                    <h1>O que é o PomodoroHelper?</h1>
+                    <p>PomodoroTimer é seu site/aplicativo para utilizar a Técnica Pomodoro. PomodoroHelper foi criado por um estudante com a intenção de facilitar seus estudos. No PomodoroHelper, você pode personalizar o cronômetro para que você possa trabalhar no seu próprio tempo.</p>
+                </div>
+            </div>
+        </main>
+        <footer>
+            <h5>© 2025 - devpiruleib. Todos os direitos reservados.</h5>
+        </footer>
+    </div>
+    <audio id="alert">
+        <source src="sounds/gemidao.mp3" type="audio/mp3">
+    </audio>
+    <script src="script.js"></script>
+</body>
+</html>

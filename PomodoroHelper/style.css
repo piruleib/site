@@ -1,0 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f6fafd;
+    font-family: "Segoe UI", Geneva, Arial, Helvetica, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15dvh;
+    background-color: #3a506b;
+
+    img {
+        transform: scale(0.4);
+    }
+}
+
+.buttons1 {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 20dvh;
+    width: 100%;
+
+    button {
+        height: 8dvh;
+        width: 25%;
+    }
+
+}
+
+.buttons2 {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    height: 20dvh;
+    width: 100%;
+
+    button {
+        height: 8dvh;
+        width: 25%;
+    }
+}
+
+.btn-not-selected {
+    background-color: #5c9ead;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 3dvh;
+    transition: 0.5s;
+}
+
+.btn-not-selected:hover, .btn-selected:hover{
+    transform: scale(1.1);
+    background-color: #ff6b6b;
+    box-shadow: 0 0 10px 5px rgba(225, 107, 107, 0.7);
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 3dvh;
+}
+
+.btn-start:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 10px 5px rgba(157, 223, 105, 0.7);
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 3dvh;
+}
+
+.btn-selected {
+    transition: 0.5s;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    font-weight: bold;
+    font-size: 3dvh;
+}
+
+.btn-start {
+    transition: 0.5s;
+    background-color: #9ddf69;
+    color: white;
+    border: none;
+    font-weight: bolder;
+    font-size: 3dvh;
+}
+
+.timer-countdown {
+    background-color: #f1f7ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40dvh;
+
+    span {
+        font-size: 25dvh;
+        font-weight: bold;
+    }
+}
+
+.about {
+    margin: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+
+    .text {
+        h1 {
+            color: #3a506b;
+        }
+
+        p {
+            color: #4a5a6a;
+        }
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 20px;
+        width: 70%;
+
+        p {
+            font-size: 20px;
+        }
+    }
+}
+
+footer{
+    margin: 30px;
+    h5{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: normal;
+        color: #4a5a6a;
+    }
+}
