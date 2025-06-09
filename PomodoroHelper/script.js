@@ -1,55 +1,39 @@
-let min = 5;
-let sec = 1;
-
-var stop = document.getElementById(stop);
-var restart = document.getElementById(restart);
-
-document.getElementById('timerResult').innerHTML = min+':00';
-const alert = document.getElementById('alert');
+let min = 9;
+let sec = 11;
 function timer() {
-    restart.disabled = true;
-    stop.disabled = false;
 
-    let timer = setInterval(function () {
-        sec--;
+    let click = 0;
+    click++;
 
-        document.getElementById('timerResult').innerHTML = min + ':' + sec;
-        console.log(min + ':' + sec);
+    if(click === 1) {
+        let timer = setInterval(function () {
+            sec--; /* Variável de segundos diminui 1 por segundo*/
 
-        if (sec < 10) {
-            document.getElementById('timerResult').innerHTML = min + ':0' + sec;
-        }
-
-        if (min < 10) {
-            document.getElementById('timerResult').innerHTML = '0' + min + ':' + sec;
-        }
-
-        if (min < 10 && sec < 10) {
-            document.getElementById('timerResult').innerHTML = '0' + min + ':0' + sec;
-        }
-
-        if (sec < 1) {
-            sec = 60;
-            min--;
-        }
-
-        if (min < -1) {
-            document.getElementById('timerResult').innerHTML = '00:00';
-            alert.play();
-            id = 0;
-        }
+            if (sec === -1) { /* Quando o número de segundos é igual a -1, ele retorna para 59. Há de ser -1, pois se for 0 ele pula de, por exemplo, 10:01 para 09:59*/
+                min--;
+                sec = 59;
+            }
 
 
-    }, 1000);
+            if (min < 10) { /* Mostra o resultado e procura a condição correta para cada tipo de situação */
+                document.getElementById('timerResult').innerHTML = '0' + min + ':' + sec;
+            } else if (sec < 10) {
+                document.getElementById('timerResult').innerHTML = min + ':0' + sec;
+            } else if (min < 10 && sec < 10) {
+                document.getElementById('timerResult').innerHTML = '0' + min + ':0' + sec;
+            } else if (min > 10 && sec < 10) {
+                document.getElementById('timerResult').innerHTML = min + ':0' + sec;
+            }
 
+            if (min === 0 && sec === 0) {
+                clearInterval(timer);
+                document.getElementById('timerResult').innerHTML = '00:00';
+            }
+            console.log(min + ':' + sec);
+
+
+        }, 1000)
+    }else if(click > 1){
+        document.getElementById('cu')
+    }
 }
-
-function stopTimer(){
-    restart.disabled = false;
-    stop.disabled = true;
-    clearInterval(timer);
-}
-
-stop.addEventListener("click", stopTimer);
-restart.addEventListener("click", timer());
-stop.disabled = true;
