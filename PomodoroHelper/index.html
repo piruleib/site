@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,36 +8,60 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
 </head>
+
 <body>
     <div class="container">
         <header>
             <img src="images/logo.png" alt="">
+            <button id="settings">Configurações</button>
         </header>
         <main>
+            <div class="displaysettings" id="displaysettings">
+                <div class="settings" id="settingsDiv">
+                    <p>Definir minutos do pomodoro:</p>
+                    <input type="number" name="pomodoroMin" id="pomodoroMin" placeholder="5">
+                    <p>Definir minutos da pausa curta:</p>
+                    <input type="number" name="sbreakMin" id="sbreakMin" placeholder="5">
+                    <p>Definir minutos da pausa longa:</p>
+                    <input type="number" name="lbreakMin" id="lbreakMin" placeholder="15">
+                    <button class="btn-not-selected" id="apply" style="height: 10dvh; width: 10%; border-radius: 15px;">Definir</button>
+                    <span id="msg"></span>
+                </div>
+            </div>
+
             <div class="timer">
                 <div class="buttons1">
-                    <button class="btn-selected">POMODORO</button>
-                    <button class="btn-not-selected">PAUSA CURTA</button>
-                    <button class="btn-not-selected">PAUSA LONGA</button>
+                    <button id="pomodoro" class="btn-selected">POMODORO</button>
+                    <button id="shortBreak" class="btn-not-selected">PAUSA CURTA</button>
+                    <button id="longBreak" class="btn-not-selected">PAUSA LONGA</button>
                 </div>
                 <div class="timer-countdown">
                     <span id="timerResult"></span>
                 </div>
                 <div class="buttons2">
                     <button id="start" class="btn-start" onclick="timer()">INICIAR</button>
-                    <button id="stop" class="btn-selected" onclick="stop()">PARAR</button>
-                    <button id="restart" class="btn-not-selected" onclick="restart()">REINICIAR</button>
+                    <button id="stop" class="btn-selected">PARAR</button>
+                    <button id="restart" class="btn-not-selected">REINICIAR</button>
 
                 </div>
             </div>
             <div class="about">
                 <div class="text">
                     <h1>O que é a "Técnica Pomodoro"?</h1>
-                    <p>A Técnica Pomodoro é um método de gestão de tempo criado por Francesco Cirillo no final dos anos 1980. A ideia é dividir o trabalho em blocos de tempo — geralmente de 25 minutos — chamados de pomodoros, seguidos por breves pausas. Após completar alguns ciclos, faz-se uma pausa mais longa. Esse método ajuda a aumentar a concentração, reduzir distrações e tornar o trabalho mais produtivo. A prática regular também melhora a percepção do tempo e promove um ritmo de trabalho mais sustentável.</p>
+                    <p>A Técnica Pomodoro é um método de gestão de tempo criado por Francesco Cirillo no final dos anos
+                        1980. A ideia é dividir o trabalho em blocos de tempo — geralmente de 25 minutos — chamados de
+                        pomodoros, seguidos por breves pausas. Após completar alguns ciclos, faz-se uma pausa mais
+                        longa. Esse método ajuda a aumentar a concentração, reduzir distrações e tornar o trabalho mais
+                        produtivo. A prática regular também melhora a percepção do tempo e promove um ritmo de trabalho
+                        mais sustentável.</p>
                     <h1>Passos básicos da Técnica Pomodoro:</h1>
-                    <p>1 - Escolha uma tarefa.<br>2 - Trabalhe nela por 25 minutos (1 pomodoro).<br>3 - Faça uma pausa de 5 minutos.<br>4 - Repita o ciclo. Após 4 pomodoros, faça uma pausa mais longa (15 a 30 minutos).</p>
+                    <p>1 - Escolha uma tarefa.<br>2 - Trabalhe nela por 25 minutos (1 pomodoro).<br>3 - Faça uma pausa
+                        de 5 minutos.<br>4 - Repita o ciclo. Após 4 pomodoros, faça uma pausa mais longa (15 a 30
+                        minutos).</p>
                     <h1>O que é o PomodoroHelper?</h1>
-                    <p>PomodoroTimer é seu site/aplicativo para utilizar a Técnica Pomodoro. PomodoroHelper foi criado por um estudante com a intenção de facilitar seus estudos. No PomodoroHelper, você pode personalizar o cronômetro para que você possa trabalhar no seu próprio tempo.</p>
+                    <p>PomodoroTimer é seu site/aplicativo para utilizar a Técnica Pomodoro. PomodoroHelper foi criado
+                        por um estudante com a intenção de facilitar seus estudos. No PomodoroHelper, você pode
+                        personalizar o cronômetro para que você possa trabalhar no seu próprio tempo.</p>
                 </div>
             </div>
         </main>
@@ -49,4 +74,5 @@
     </audio>
     <script src="script.js"></script>
 </body>
+
 </html>

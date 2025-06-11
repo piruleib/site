@@ -9,15 +9,30 @@ body {
     font-family: "Segoe UI", Geneva, Arial, Helvetica, sans-serif;
 }
 
+main{
+    font-size: 25px;
+    p{
+        margin-top: 10vh;
+    }
+    text-align: center;
+    color: #4a5a6a;
+}
+
 header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 15dvh;
+    height: 20dvh;
     background-color: #3a506b;
-
+    button{
+        background: none;
+        border: none;
+        color: white;
+        font-size: 3dvh;
+        font-weight: bold;
+    }
     img {
-        transform: scale(0.4);
+        transform: scale(0.45);
     }
 }
 
@@ -114,6 +129,7 @@ header {
     justify-content: center;
     text-align: center;
     flex-direction: column;
+    
 
     .text {
         h1 {
@@ -128,7 +144,6 @@ header {
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        gap: 20px;
         width: 70%;
 
         p {
@@ -146,4 +161,42 @@ footer{
         font-weight: normal;
         color: #4a5a6a;
     }
+}
+
+#settingsDiv {
+    overflow: hidden;
+    height: 0;
+    transition: height 0.5s ease;
+}
+
+
+.settings{
+    height: 0dvh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 0 50px 0px #bbbbbb;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    input{
+        width: 10%;
+        height: 6dvh;
+        border: 3px solid #ffe0e0;
+        border-radius: 10px;
+        padding: 1vh;
+        color: #4a5a6a;
+    }
+    p {
+        color: #4a5a6a;
+        font-size: 30px;
+    }
+}
+
+span{
+    color: #4a5a6a;
+}
+
+.displaysettings{
+    display: none;
 }

@@ -220,6 +220,7 @@ footer {
         border-radius: 10px;
     }
     display: flex;
+    flex-direction: column;
     flex-direction: row;
     gap: 30px;
 }
@@ -227,4 +228,8 @@ footer {
 .profile{
     display: flex;
     flex-direction: column;
+}
+
+.thanks{
+    width: 50%;
 }
