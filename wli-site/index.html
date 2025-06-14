@@ -7,7 +7,9 @@
     <title>Project Windows Longhorn Ultimate</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 </head>
 
 <body>
@@ -18,14 +20,14 @@
             <a href="about.html" class="ahover">ABOUT US</a>
         </header>
         <div class="separador"></div>
-        <main>
+        <main class="animation">
             <h1>Welcome to the Windows Longhorn Ultimate project!</h1>
             <p>This is an unofficial open-source Windows standalone founded by <a target="_blank"
                     href="https://piruleib.github.io/site">devpiruleib</a> and <a href="#">AoiDev</a>.</p>
             <br><br>
             <div class="separador"></div>
             <div class="info">
-                <div class="txt" data-animation="animate__fadeInUp">
+                <div class="txt animation">
                     <h1>What is Windows Longhorn?</h1>
                     <p>"Windows Longhorn" was the codename for the development of Windows Vista. It was intended to be a
                         version between XP and Vista. Development started in May 2001 — even before the release of
@@ -37,19 +39,19 @@
                 </div>
             </div>
             <div class="separador"></div>
-            <div class="info animate__animated animate__fadeInUp">
-                <div class="imgm">
+            <div class="info animation">
+                <div class="imgm animation">
                     <img src="img/img2.png" class="imagem2" alt="Image 2">
                 </div>
-                <div class="txt">
+                <div class="txt animation">
                     <h1>Okay. So what is Windows Longhorn Ultimate?</h1>
                     <p>Windows Longhorn Ultimate is an unofficial standalone version of Windows Longhorn founded by two (kind of unocuppied high schoolers) and later getting supported by friends and even teachers!
                     </p>
                 </div>
             </div>
             <div class="separador"></div>
-            <div class="info" data-animation="animate__fadeInUp">
-                <div class="txt">
+            <div class="info animation">
+                <div class="txt animation">
                     <h1>Why are you doing this?</h1>
                     <p>Why?? Because we LOVE Windows Longhorn! It's our favorite version of Windows. We want to make a
                         great experience
@@ -57,12 +59,12 @@
                         to be buggy and hard to use.
                     </p>
                 </div>
-                <div class="imgm">
+                <div class="imgm animation">
                     <img src="https://i.blogs.es/1a6feb/longhorn/1366_2000.jpg" class="imagem3" alt="Image 3">
                 </div>
             </div>
-            <div class="separador"></div>
-            <div class="link" data-animation="animate__fadeInUp">
+            <div class="separador animation"></div>
+            <div class="link animation">
                 <h1>Meet The Longhorn Team!</h1>
                 <p>Meet the team behind the project Windows Longhorn Ultimate!</p><br>
                 <a href="about.html" class="selected" style="width: 60%; border-radius: 10px;">ABOUT US</a>
@@ -77,8 +79,10 @@
             <a href="disclaimer.html">DISCLAIMERS</a>
         </footer>
     </div>
+    <div class="separador"></div><br>&nbsp;
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
 </body>
 
 </html>

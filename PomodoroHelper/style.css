@@ -9,30 +9,44 @@ body {
     font-family: "Segoe UI", Geneva, Arial, Helvetica, sans-serif;
 }
 
-main{
-    font-size: 25px;
-    p{
-        margin-top: 10vh;
+.message {
+    height: 12vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+}
+
+main {
+    font-size: 22px;
+
+    p {
+        color: #3a506b;
     }
+
     text-align: center;
-    color: #4a5a6a;
 }
 
 header {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20dvh;
+    height: 15dvh;
+    width: 100%;
     background-color: #3a506b;
-    button{
+
+    button {
         background: none;
         border: none;
         color: white;
         font-size: 3dvh;
         font-weight: bold;
+        position: relative;
     }
+
     img {
-        transform: scale(0.45);
+        transform: scale(0.35);
     }
 }
 
@@ -40,7 +54,7 @@ header {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    height: 20dvh;
+    height: 15dvh;
     width: 100%;
 
     button {
@@ -54,7 +68,7 @@ header {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    height: 20dvh;
+    min-height: 1dvh;
     width: 100%;
 
     button {
@@ -72,17 +86,19 @@ header {
     transition: 0.5s;
 }
 
-.btn-not-selected:hover, .btn-selected:hover{
+.btn-not-selected:hover,
+.btn-selected:hover {
     transform: scale(1.1);
     background-color: #ff6b6b;
     box-shadow: 0 0 10px 5px rgba(225, 107, 107, 0.7);
     color: white;
     border: none;
+    z-index: 1;
     font-weight: bold;
     font-size: 3dvh;
 }
 
-.btn-start:hover{
+.btn-start:hover {
     transform: scale(1.1);
     box-shadow: 0 0 10px 5px rgba(157, 223, 105, 0.7);
     color: white;
@@ -110,11 +126,13 @@ header {
 }
 
 .timer-countdown {
-    background-color: #f1f7ff;
+    background-color: #e8f1fb;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 40dvh;
+    box-shadow: 0 0 50px 0px #a8c3e2;
+
 
     span {
         font-size: 25dvh;
@@ -123,15 +141,13 @@ header {
 }
 
 .about {
-    margin: 50px;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
     flex-direction: column;
-    
+    text-align: center; /* não funciona aaaaaaaa*/
 
     .text {
+    margin: 0 auto;
+    text-align: center;
         h1 {
             color: #3a506b;
         }
@@ -145,6 +161,8 @@ header {
         align-items: center;
         flex-direction: column;
         width: 70%;
+        gap: 30px;
+        padding-top: 10dvh;
 
         p {
             font-size: 20px;
@@ -152,14 +170,26 @@ header {
     }
 }
 
-footer{
+footer {
     margin: 30px;
-    h5{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h5, a{
         display: flex;
         justify-content: center;
         align-items: center;
         font-weight: normal;
         color: #4a5a6a;
+        text-decoration: none;
+    }
+    a{
+        font-size: 13px;
+    }
+
+    a:hover{
+        text-decoration: underline;
     }
 }
 
@@ -170,7 +200,7 @@ footer{
 }
 
 
-.settings{
+.settings {
     height: 0dvh;
     display: flex;
     flex-direction: column;
@@ -179,7 +209,8 @@ footer{
     justify-content: center;
     align-items: center;
     gap: 20px;
-    input{
+
+    input {
         width: 10%;
         height: 6dvh;
         border: 3px solid #ffe0e0;
@@ -187,16 +218,91 @@ footer{
         padding: 1vh;
         color: #4a5a6a;
     }
+
     p {
         color: #4a5a6a;
         font-size: 30px;
     }
 }
 
-span{
+span {
     color: #4a5a6a;
 }
 
-.displaysettings{
+.displaysettings {
     display: none;
+}
+
+.settingsbutton {
+    min-height: 1px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.settings-btn {
+    justify-content: center;
+    align-items: center;
+    background-color: #3a506b;
+    border: none;
+    color: white;
+    height: 7dvh;
+    width: 13%;
+    display: flex;
+    font-size: 3dvh;
+    font-weight: bold;
+}
+
+
+
+/* me when responsividade */
+
+@media (max-width: 768px) {
+    header {
+        height: 15dvh;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+
+        img {
+            transform: scale(0.3);
+        }
+    }
+
+    .about{
+        .text{
+            padding-top: 5dvh;
+        }
+        
+    }
+
+    .settingsbutton {
+        justify-content: center;
+
+        .settings-btn {
+            width: 60%;
+        }
+    }
+
+    main {
+
+        .buttons1,
+        .buttons2 {
+            button {
+                width: 50%;
+            }
+        }
+
+        .timer-countdown {
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 30dvh;
+
+            span {
+                font-size: 17dvh;
+                font-weight: bold;
+            }
+        }
+    }
 }

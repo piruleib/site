@@ -1,6 +1,9 @@
-@font-face {
-    font-family: Inter;
-    src: url('font/Inter.ttf');
+:root {
+  font-family: Inter, sans-serif;
+  font-feature-settings: 'liga' 1, 'calt' 1; /* fix for Chrome */
+}
+@supports (font-variation-settings: normal) {
+  :root { font-family: InterVariable, sans-serif; }
 }
 
 * {
@@ -80,6 +83,14 @@ main {
 
 .imgm:hover {
     transform: scale(0.95);
+}
+
+a{
+    transition: 0.5s;
+}
+a:hover{
+    transform: scale(1.1);
+    box-shadow: 0 0 10px 2px rgb(80, 80, 80);
 }
 
 .imgm .imagem,
@@ -171,6 +182,12 @@ footer {
     background-color: white;
     color: black;
 }
+
+.animation{
+    visibility: hidden;
+}
+
+
 
 /* responsividade yayy */
 

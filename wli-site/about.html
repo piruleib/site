@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="img/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="preconnect" href="https://rsms.me/">
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
 </head>
 
 <body>
@@ -18,13 +20,13 @@
             <a href="about.html" class="selected">ABOUT US</a>
         </header>
         <div class="separador"></div>
-        <main id="mainabout">
+        <main id="mainabout" class="animation">
             <h1>About us!</h1>
             <p>Meet the team behind Windows Longhorn Ultimate!</p>
             <br><br>
             <div class="separador"></div><br>
             <h1>FOUNDERS</h1><br>
-            <div class="infoteam">
+            <div class="infoteam animation">
                 <div class="profile">
                     <img src="img/images.jpg" alt="">
                     <p>piruleib (devpiruleib)</p><br><br>
@@ -34,9 +36,9 @@
                     <p>AoiDev</p>
                 </div>
             </div>
-            <div class="separador"></div><br>
+            <div class="separador animation"></div><br>
             <h1>DEVELOPERS</h1><br>
-            <div class="infoteam">
+            <div class="infoteam animation">
                 <div class="profile">
                     <img src="img/Bliss_(Windows_XP).png" alt="">
                     <p>dev 1</p><br><br>
@@ -54,9 +56,9 @@
                     <p>dev 4</p>
                 </div>
             </div>
-            <div class="separador"></div><br>
+            <div class="separador animation"></div><br>
             <h1>DESIGNERS</h1><br>
-            <div class="infoteam">
+            <div class="infoteam animation">
                 <div class="profile">
                     <img src="img/Bliss_(Windows_XP).png" alt="">
                     <p>designer 1</p><br><br>
@@ -74,8 +76,8 @@
                     <p>designer 4</p>
                 </div>
             </div>
-            <div class="separador"></div><br>
-            <div class="thanks">
+            <div class="separador animation"></div><br>
+            <div class="thanks animation">
                 <h1>SPECIAL THANKS</h1><br>
                 <p>A very special thanks to Jasiel. More than a teacher, he became our advisor for this project. Thanks
                     for supporting
@@ -84,7 +86,7 @@
                 </p><br>
             </div>
         </main>
-        <div class="separador"></div>
+        <div class="separador animation"></div>
         <footer>
             <p style="color: #545454">Site created by devpiruleib. <br>
                 © 2025 - The Longhorn Ultimate Project Team. <br> Not affiliated with Microsoft Corporation.
@@ -93,8 +95,10 @@
             <a href="disclaimer.html">DISCLAIMERS</a>
         </footer><br>
     </div>
+    <div class="separador"></div><br>&nbsp;
 
-    <script src="script.js"></script>
+    <script src="script.js" defer></script>
+    <script src="https://unpkg.com/scrollreveal"></script>
 </body>
 
 </html>
