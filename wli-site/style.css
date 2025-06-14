@@ -27,13 +27,17 @@ h1, a, p {
 header {
     height: 190px;
     display: flex;
-    justify-content: center;
     align-items: center;
 }
 
-#logo {
-    transform: scale(0.3);
+.logo{
+    transform: scale(0.5);
 }
+
+.logo:hover{
+    transform: scale(0.55);
+}
+
 
 main {
     margin-top: 30px;
@@ -87,10 +91,6 @@ main {
 
 a{
     transition: 0.5s;
-}
-a:hover{
-    transform: scale(1.1);
-    box-shadow: 0 0 10px 2px rgb(80, 80, 80);
 }
 
 .imgm .imagem,
