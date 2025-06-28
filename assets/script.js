@@ -2,7 +2,7 @@ window.revelar = ScrollReveal({reset:true})
 
 revelar.reveal('.animation-txt', {
     duration: 2000,
-    distance: '20px',
+    distance: '90px',
 });  
 
 revelar.reveal('.animation-img', {
