@@ -91,6 +91,7 @@ restart.addEventListener('click', function () {
     clearInterval(blinkingInterval);
     blinkingInterval = null;
     document.getElementById('timerResult').style.color = "#4a5a6a";
+    startButton.disabled = false;
 })
 
 // timer
@@ -120,6 +121,11 @@ function timer() {
             }
 
             return;
+        }
+
+        if(min === 0 && sec === 0){
+            alert.play();
+            startButton.disabled = true;
         }
 
         if (sec === 0) {
