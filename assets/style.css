@@ -335,3 +335,95 @@ a{
   font-family: var(--popins);
   text-decoration: none;
 }
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    height: auto;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  p{
+    text-align: center;
+  }
+
+  #vectorseta{
+    display: none;
+  }
+  .menu1, .menubetween, .menu2 {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .menu2 ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .titlemain {
+    flex-direction: column;
+    height: auto;
+    padding: 2rem 1rem;
+    gap: 1rem;
+    text-align: center;
+  }
+
+
+  #selfimg {
+    width: 60%;
+    height: auto;
+  }
+
+  .aboutme {
+    flex-direction: column;
+    padding: 1rem;
+    align-items: center;
+    text-align: center;
+  }
+
+  .abouttext {
+    margin: 0;
+    padding: 1rem;
+  }
+
+  .abouttext p {
+    font-size: 1rem;
+  }
+
+  .text{
+    text-align: center;
+  }
+
+  #imgabout {
+    margin: 1rem 0;
+    width: 80%;
+    height: auto;
+  }
+
+  .ttl-especialidades-projetos {
+    flex-direction: row;
+    font-size: 1.5rem;
+  }
+
+  .linguagens ul {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .pomodoro {
+    width: 90%;
+    height: auto;
+    padding: 1rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+  }
+
+  footer p, footer h2 {
+    font-size: 0.9rem;
+  }
+}
