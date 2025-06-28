@@ -1,0 +1,337 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body{
+  scroll-behavior: smooth;
+}
+:root {
+  --bgcolor: #222831;
+  --boxcolor: #161a20;
+  --boxborder: #13171d;
+  --oswald: "Oswald", sans-serif;
+  --popins: "Poppins", sans-serif;
+}
+
+.oswald-font {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-thin {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.poppins-extralight {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: normal;
+}
+
+.poppins-light {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.poppins-regular {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.poppins-medium {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: normal;
+}
+
+.poppins-semibold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: normal;
+}
+
+.poppins-bold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.poppins-extrabold {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: normal;
+}
+
+.poppins-black {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.poppins-thin-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 100;
+  font-style: italic;
+}
+
+.poppins-extralight-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 200;
+  font-style: italic;
+}
+
+.poppins-light-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  font-style: italic;
+}
+
+.poppins-regular-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.poppins-medium-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.poppins-semibold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-style: italic;
+}
+
+.poppins-bold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 700;
+  font-style: italic;
+}
+
+.poppins-extrabold-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.poppins-black-italic {
+  font-family: "Poppins", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
+
+.menu1 {
+  font-family: var(--oswald);
+  color: white;
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menubetween {
+  width: 40%;
+}
+
+header {
+  display: flex;
+  flex-direction: row;
+  height: 10vh;
+}
+
+.menu2 {
+  font-family: var(--popins);
+  color: white;
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    gap: 30px;
+  }
+}
+
+body {
+  background-color: var(--bgcolor);
+}
+
+.titlemain {
+  font-family: var(--popins);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+
+  #vectorseta {
+    height: 300px;
+    margin-bottom: 180px;
+    margin-left: 100px;
+  }
+
+  #imgtitle {
+    height: 600px;
+  }
+}
+
+.text {
+  font-family: var(--popins);
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+
+  h3 {
+    font-weight: normal;
+    color: white;
+  }
+}
+
+.two {
+  display: flex;
+  flex-direction: row;
+  font-size: 10px;
+}
+
+.abouttext {
+  margin-left: 300px;
+  padding-top: 100px;
+  color: white;
+  font-family: var(--popins);
+}
+
+.aboutme {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+
+  img {
+    margin-top: 100px;
+    height: 300px;
+    margin-right: 150px;
+  }
+}
+
+.about {
+  font-size: 30px;
+  display: flex;
+  flex-direction: row;
+}
+
+.abouttext {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+#selfimg {
+  border-radius: 600px;
+}
+
+#setabaixo {
+  background-image: url(/assets/img/setabaixo.png);
+  border-style: none;
+  transform: scale(10)
+}
+
+.ttl-especialidades-projetos {
+  font-family: var(--popins);
+  display: flex;
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.especialidades,
+.projetos {
+  font-family: var(--popins);
+  font-size: 20px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 100px;
+}
+
+.linguagens li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+}
+
+.linguagens ul li i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.linguagens ul li i p {
+  color: white;
+  font-size: 30px;
+  font-family: var(--popins);
+  font-weight: normal;
+}
+
+.linguagens ul {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+  margin-top: 50px;
+}
+
+.pomodoro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--boxcolor);
+  border-color: var(--boxborder);
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 20px;
+  height: 500px;
+  width: 45%;
+}
+
+.pomodoro p {
+  text-align: center;
+}
+
+.pomodoro img {
+  height: 100px;
+}
+
+footer {
+  height: 100px;
+  background-color: var(--boxcolor);
+  margin-top: 100px;
+}
+
+footer h2, footer p {
+  color: white;
+  font-family: var(--popins);
+}
+
+a{
+  color: white;
+  font-family: var(--popins);
+  text-decoration: none;
+}
