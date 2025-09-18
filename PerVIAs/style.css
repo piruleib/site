@@ -1,0 +1,33 @@
+.inter-bold{
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bold;
+  font-style: normal;
+}
+
+.inter-normal {
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+body{
+    overflow:hidden;
+}
+
+header{
+    background-color: black;
+    height: 8dvh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    h1, p{
+        color: white;
+    }
+}
+
+.info{
+  height: 100dvh;
+}

@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>PerVIAs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Link para o CSS do Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    
+    <!-- Adicionando Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --accent: #f59e0b;
+            --background: #f8fafc;
+            --text: #1e293b;
+            --card-bg: #ffffff;
+            --header-bg: linear-gradient(135deg, #2563eb, #1d4ed8);
+            --footer-bg: #1e293b;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-mode {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #10b981;
+            --dark: #f8fafc;
+            --light: #1e293b;
+            --gray: #94a3b8;
+            --accent: #f59e0b;
+            --background: #0f172a;
+            --text: #f8fafc;
+            --card-bg: #1e293b;
+            --header-bg: linear-gradient(135deg, #1e40af, #1e3a8a);
+            --footer-bg: #0f172a;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text);
+            background-color: var(--background);
+            line-height: 1.6;
+        }
+        
+        /* Header estilizado */
+        header {
+            background: var(--header-bg);
+            color: white;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 6px var(--shadow);
+            position: relative;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+        }
+        
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Botão de alternância de modo */
+        .theme-toggle {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50px;
+            width: 60px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .theme-toggle i {
+            font-size: 14px;
+            color: white;
+            z-index: 2;
+            transition: opacity 0.3s;
+        }
+        
+        .theme-toggle .fa-sun {
+            opacity: 1;
+        }
+        
+        .theme-toggle .fa-moon {
+            opacity: 0;
+        }
+        
+        .dark-mode .theme-toggle .fa-sun {
+            opacity: 0;
+        }
+        
+        .dark-mode .theme-toggle .fa-moon {
+            opacity: 1;
+        }
+        
+        .theme-toggle span {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: white;
+            transition: transform 0.3s;
+            left: 3px;
+            z-index: 1;
+        }
+        
+        .dark-mode .theme-toggle span {
+            transform: translateX(30px);
+        }
+        
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Estilo do mapa */
+        #map {
+            height: 70vh;
+            width: 100%;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 4px 12px var(--shadow);
+            z-index: 1;
+        }
+        
+        /* Ajuste do mapa para modo escuro */
+        .dark-mode .leaflet-tile {
+            filter: brightness(0.6) invert(1) contrast(3) hue-rotate(200deg) saturate(0.3) brightness(0.7);
+        }
+        
+        /* Seção de informações */
+        .info {
+            padding: 3rem 2rem;
+            background-color: var(--card-bg);
+            margin: 2rem auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow);
+            max-width: 1000px;
+        }
+        
+        .info h1 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .info h1:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .info p {
+            margin-bottom: 2rem;
+            color: var(--gray);
+            font-size: 1.05rem;
+        }
+        
+        /* Estilização dos popups do mapa */
+        .leaflet-popup-content-wrapper {
+            border-radius: 8px;
+            box-shadow: 0 4px 16px var(--shadow);
+            background: var(--card-bg);
+            color: var(--text);
+        }
+        
+        .leaflet-popup-content {
+            color: var(--text);
+        }
+        
+        .leaflet-popup-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .leaflet-popup-content img {
+            border-radius: 6px;
+            margin: 0.5rem 0;
+        }
+        
+        .leaflet-popup-content p {
+            color: var(--gray);
+        }
+        
+        .leaflet-container a.leaflet-popup-close-button {
+            color: var(--text);
+        }
+        
+        .leaflet-container a.leaflet-popup-close-button:hover {
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--footer-bg);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .team-members {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .member {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .member i {
+            margin-right: 0.5rem;
+            font-size: 0.8rem;
+        }
+        
+        /* Botão de adicionar ponto */
+        .add-point-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .add-point-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+        
+        /* Modal de cadastro */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-header h2 {
+            color: var(--primary);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text);
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+        
+        .form-group input, 
+        .form-group textarea, 
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--gray);
+            border-radius: 6px;
+            background: var(--card-bg);
+            color: var(--text);
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .btn-submit:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Indicador de seleção de localização */
+        .location-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: white;
+            padding: 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            z-index: 1000;
+            display: none;
+        }
+        
+        .dark-mode .location-selector {
+            background: var(--card-bg);
+            color: var(--text);
+        }
+        
+        .location-selector.active {
+            display: block;
+        }
+        
+        /* Lista de pontos */
+        .points-list {
+            margin-top: 2rem;
+        }
+        
+        .point-item {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        
+        .point-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .point-title {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .point-category {
+            background: var(--secondary);
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+        }
+        
+        .point-description {
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+        }
+        
+        .point-address {
+            font-style: italic;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Coordenadas no formulário */
+        .coordinates-display {
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .dark-mode .coordinates-display {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 1rem;
+            }
+            
+            .header-content {
+                margin-bottom: 1rem;
+            }
+            
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            header p {
+                margin-top: 0.5rem;
+                font-size: 1rem;
+            }
+            
+            .info {
+                padding: 2rem 1rem;
+                margin: 1rem;
+            }
+            
+            .info h1 {
+                font-size: 1.5rem;
+            }
+            
+            .theme-toggle {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            .modal-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1 class="inter-bold">PerVIAs</h1>
+            <p class="inter-normal"> - Sua acessibilidade é nossa prioridade.</p>
+        </div>
+        <button class="theme-toggle" aria-label="Alternar modo claro/escuro">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
+            <span></span>
+        </button>
+    </header>
+
+    <div class="container">
+        <!-- Div onde o mapa será renderizado -->
+        <div id="map"></div>
+        
+        <!-- Indicador de seleção de localização -->
+        <div class="location-selector" id="locationSelector">
+            <p><i class="fas fa-mouse-pointer"></i> Clique no mapa para selecionar a localização</p>
+            <button id="cancelLocationSelect" class="btn-submit" style="margin-top: 10px; padding: 5px 10px; font-size: 0.9rem;">Cancelar</button>
+        </div>
+
+        <!-- Div para as informações abaixo do mapa -->
+        <div class="info">
+            <h1>O que é o PerVIAs?</h1>
+            <p>O PerVIAs é um mapa interativo que identifica e mostra os locais com acessibilidade para pessoas com deficiência (PCD) em Espírito Santo do Pinhal. Nosso objetivo é facilitar a mobilidade e promover inclusão na cidade.</p>
+            
+            <h1>Quem criou o PerVIAs?</h1>
+            <p>O PerVIAs é um projeto desenvolvido por alunos da ETEC de Espírito Santo do Pinhal, com o propósito de melhorar a acessibilidade urbana através da tecnologia.</p>
+            
+            <div class="team-members">
+                <span class="member"><i class="fas fa-user"></i> Carlos Tonholo</span>
+                <span class="member"><i class="fas fa-user"></i> Diogo Ricardo</span>
+                <span class="member"><i class="fas fa-user"></i> Gabriel Bernardo</span>
+                <span class="member"><i class="fas fa-user"></i> Giovani Ribeiro</span>
+                <span class="member"><i class="fas fa-user"></i> Guilherme da Silva</span>
+            </div>
+            
+            <div class="points-list" id="pointsList">
+                <h2>Pontos Cadastrados</h2>
+                <div id="pointsContainer">
+                    <!-- Os pontos serão carregados aqui via JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botão para adicionar novo ponto -->
+    <button class="add-point-btn" id="addPointBtn">
+        <i class="fas fa-plus"></i>
+    </button>
+
+    <!-- Modal para cadastro de novo ponto -->
+    <div class="modal" id="pointModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Adicionar Ponto Acessível</h2>
+                <button class="close-modal" id="closeModal">&times;</button>
+            </div>
+            <form id="pointForm">
+                <div class="form-group">
+                    <label for="pointName">Nome do Local</label>
+                    <input type="text" id="pointName" required placeholder="Ex: Escola Municipal, Centro Comercial, etc.">
+                </div>
+                <div class="form-group">
+                    <label for="pointCategory">Categoria</label>
+                    <select id="pointCategory" required>
+                        <option value="">Selecione uma categoria</option>
+                        <option value="education">Educação</option>
+                        <option value="health">Saúde</option>
+                        <option value="commerce">Comércio</option>
+                        <option value="public">Espaço Público</option>
+                        <option value="transport">Transporte</option>
+                        <option value="other">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="pointDescription">Descrição</label>
+                    <textarea id="pointDescription" required placeholder="Descreva os recursos de acessibilidade disponíveis..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="pointAddress">Endereço</label>
+                    <input type="text" id="pointAddress" required placeholder="Endereço completo">
+                </div>
+                <div class="form-group">
+                    <label>Localização no Mapa</label>
+                    <div class="coordinates-display" id="coordinatesDisplay">
+                        <p>Clique no botão abaixo para selecionar a localização no mapa</p>
+                    </div>
+                    <button type="button" id="selectLocationBtn" class="btn-submit" style="margin-top: 10px;">
+                        <i class="fas fa-map-marker-alt"></i> Selecionar Localização no Mapa
+                    </button>
+                    <input type="hidden" id="pointLat">
+                    <input type="hidden" id="pointLng">
+                </div>
+                <button type="submit" class="btn-submit">Salvar Ponto</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2023 PerVIAs - Projeto de Acessibilidade | Desenvolvido por alunos da ETEC Espírito Santo do Pinhal</p>
+    </footer>
+
+    <!-- Scripts do Leaflet -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script>
+        // Inicializa o mapa no elemento "map"
+        const map = L.map('map').setView([-22.193601, -46.747942], 13); // Espírito Santo do Pinhal
+
+        // Adiciona o mapa base do OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Array para armazenar os marcadores
+        let markers = [];
+        let tempMarker = null; // Marcador temporário para seleção de localização
+        let isSelectingLocation = false; // Modo de seleção de localização
+
+        // Dados iniciais de exemplo
+        const initialPoints = [
+            {
+                id: 1,
+                name: "E. E. Cardeal Leme",
+                category: "education",
+                description: "Escola estadual com rampas de acesso e banheiros adaptados.",
+                address: "R. Maj. Salomão, 300 - Centro, Espírito Santo do Pinhal - SP",
+                lat: -22.1973722,
+                lng: -46.7462113
+            },
+            {
+                id: 2,
+                name: "E. E. Almeida Vergueiro",
+                category: "education",
+                description: "Escola estadual com acessibilidade para cadeirantes.",
+                address: "R. Cel. Joaquim José, 470 - Centro, Espírito Santo do Pinhal - SP",
+                lat: -22.193269,
+                lng: -46.748630
+            },
+            {
+                id: 3,
+                name: "Igreja Matriz",
+                category: "public",
+                description: "Igreja com rampas de acesso e espaço reservado para cadeirantes.",
+                address: "Praça Dr. Arthur de Queirós, 55 - Centro, Espírito Santo do Pinhal - SP",
+                lat: -22.193751,
+                lng: -46.746802
+            }
+        ];
+
+        // Função para carregar pontos do localStorage
+        function loadPoints() {
+            let points = JSON.parse(localStorage.getItem('accessiblePoints')) || [];
+            
+            // Se não houver pontos no localStorage, usar os iniciais
+            if (points.length === 0) {
+                points = initialPoints;
+                localStorage.setItem('accessiblePoints', JSON.stringify(points));
+            }
+            
+            return points;
+        }
+
+        // Função para salvar pontos no localStorage
+        function savePoints(points) {
+            localStorage.setItem('accessiblePoints', JSON.stringify(points));
+        }
+
+        // Função para adicionar marcadores no mapa
+        function addMarkersToMap(points) {
+            // Limpar marcadores existentes
+            markers.forEach(marker => map.removeLayer(marker));
+            markers = [];
+            
+            // Adicionar cada ponto como marcador
+            points.forEach(point => {
+                const marker = L.marker([point.lat, point.lng])
+                    .addTo(map)
+                    .bindPopup(`
+                        <div style="text-align: center;">
+                            <h3>${point.name}</h3>
+                            <p><strong>Categoria:</strong> ${getCategoryName(point.category)}</p>
+                            <p>${point.description}</p>
+                            <p><strong>Endereço:</strong> ${point.address}</p>
+                        </div>
+                    `);
+                
+                markers.push(marker);
+            });
+        }
+
+        // Função para obter o nome da categoria
+        function getCategoryName(category) {
+            const categories = {
+                'education': 'Educação',
+                'health': 'Saúde',
+                'commerce': 'Comércio',
+                'public': 'Espaço Público',
+                'transport': 'Transporte',
+                'other': 'Outro'
+            };
+            
+            return categories[category] || 'Outro';
+        }
+
+        // Função para exibir pontos na lista
+        function renderPointsList(points) {
+            const container = document.getElementById('pointsContainer');
+            container.innerHTML = '';
+            
+            if (points.length === 0) {
+                container.innerHTML = '<p>Nenhum ponto cadastrado ainda.</p>';
+                return;
+            }
+            
+            points.forEach(point => {
+                const pointElement = document.createElement('div');
+                pointElement.className = 'point-item';
+                pointElement.innerHTML = `
+                    <div class="point-header">
+                        <span class="point-title">${point.name}</span>
+                        <span class="point-category">${getCategoryName(point.category)}</span>
+                    </div>
+                    <p class="point-description">${point.description}</p>
+                    <p class="point-address">${point.address}</p>
+                `;
+                
+                container.appendChild(pointElement);
+            });
+        }
+
+        // Iniciar modo de seleção de localização
+        function startLocationSelection() {
+            isSelectingLocation = true;
+            document.getElementById('locationSelector').classList.add('active');
+            
+            // Alterar o cursor do mapa para indicar modo de seleção
+            map.getContainer().style.cursor = 'crosshair';
+            
+            // Fechar o modal temporariamente
+            document.getElementById('pointModal').style.display = 'none';
+        }
+
+        // Finalizar modo de seleção de localização
+        function finishLocationSelection(lat, lng) {
+            isSelectingLocation = false;
+            document.getElementById('locationSelector').classList.remove('active');
+            
+            // Restaurar o cursor padrão do mapa
+            map.getContainer().style.cursor = '';
+            
+            // Preencher os campos ocultos com as coordenadas
+            document.getElementById('pointLat').value = lat;
+            document.getElementById('pointLng').value = lng;
+            
+            // Atualizar a exibição das coordenadas
+            document.getElementById('coordinatesDisplay').innerHTML = `
+                <p><strong>Latitude:</strong> ${lat.toFixed(6)}</p>
+                <p><strong>Longitude:</strong> ${lng.toFixed(6)}</p>
+            `;
+            
+            // Reabrir o modal
+            document.getElementById('pointModal').style.display = 'flex';
+        }
+
+        // Cancelar seleção de localização
+        function cancelLocationSelection() {
+            isSelectingLocation = false;
+            document.getElementById('locationSelector').classList.remove('active');
+            
+            // Restaurar o cursor padrão do mapa
+            map.getContainer().style.cursor = '';
+            
+            // Remover marcador temporário se existir
+            if (tempMarker) {
+                map.removeLayer(tempMarker);
+                tempMarker = null;
+            }
+            
+            // Reabrir o modal
+            document.getElementById('pointModal').style.display = 'flex';
+        }
+
+        // Controle do modo escuro
+        const toggleButton = document.querySelector('.theme-toggle');
+        const body = document.body;
+        
+        // Verificar preferência do usuário no localStorage
+        if (localStorage.getItem('theme') === 'dark') {
+            body.classList.add('dark-mode');
+        }
+        
+        // Alternar modo claro/escuro
+        toggleButton.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            // Salvar preferência do usuário
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+            } else {
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Controle do modal de cadastro
+        const addPointBtn = document.getElementById('addPointBtn');
+        const pointModal = document.getElementById('pointModal');
+        const closeModal = document.getElementById('closeModal');
+        const pointForm = document.getElementById('pointForm');
+        const selectLocationBtn = document.getElementById('selectLocationBtn');
+        const cancelLocationSelect = document.getElementById('cancelLocationSelect');
+        
+        // Abrir modal
+        addPointBtn.addEventListener('click', () => {
+            pointModal.style.display = 'flex';
+            // Limpar coordenadas ao abrir o modal
+            document.getElementById('coordinatesDisplay').innerHTML = 
+                '<p>Clique no botão abaixo para selecionar a localização no mapa</p>';
+            document.getElementById('pointLat').value = '';
+            document.getElementById('pointLng').value = '';
+        });
+        
+        // Fechar modal
+        closeModal.addEventListener('click', () => {
+            pointModal.style.display = 'none';
+        });
+        
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', (e) => {
+            if (e.target === pointModal) {
+                pointModal.style.display = 'none';
+            }
+        });
+        
+        // Iniciar seleção de localização
+        selectLocationBtn.addEventListener('click', startLocationSelection);
+        
+        // Cancelar seleção de localização
+        cancelLocationSelect.addEventListener('click', cancelLocationSelection);
+        
+        // Processar formulário de cadastro
+        pointForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Validar se a localização foi selecionada
+            const lat = document.getElementById('pointLat').value;
+            const lng = document.getElementById('pointLng').value;
+            
+            if (!lat || !lng) {
+                alert('Por favor, selecione uma localização no mapa.');
+                return;
+            }
+            
+            // Obter valores do formulário
+            const name = document.getElementById('pointName').value;
+            const category = document.getElementById('pointCategory').value;
+            const description = document.getElementById('pointDescription').value;
+            const address = document.getElementById('pointAddress').value;
+            
+            // Criar novo ponto
+            const newPoint = {
+                id: Date.now(), // ID único baseado no timestamp
+                name,
+                category,
+                description,
+                address,
+                lat: parseFloat(lat),
+                lng: parseFloat(lng)
+            };
+            
+            // Salvar o novo ponto
+            const points = loadPoints();
+            points.push(newPoint);
+            savePoints(points);
+            
+            // Atualizar a interface
+            addMarkersToMap(points);
+            renderPointsList(points);
+            
+            // Fechar o modal e limpar o formulário
+            pointModal.style.display = 'none';
+            pointForm.reset();
+            
+            alert('Ponto adicionado com sucesso!');
+        });
+
+        // Inicializar a aplicação
+        document.addEventListener('DOMContentLoaded', () => {
+            const points = loadPoints();
+            addMarkersToMap(points);
+            renderPointsList(points);
+        });
+
+        // Adicionar evento de clique no mapa para capturar coordenadas
+        map.on('click', (e) => {
+            if (isSelectingLocation) {
+                // Remover marcador temporário anterior se existir
+                if (tempMarker) {
+                    map.removeLayer(tempMarker);
+                }
+                
+                // Adicionar um marcador temporário no local clicado
+                tempMarker = L.marker(e.latlng, {
+                    icon: L.icon({
+                        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowSize: [41, 41]
+                    })
+                }).addTo(map);
+                
+                // Finalizar a seleção de localização
+                finishLocationSelection(e.latlng.lat, e.latlng.lng);
+            }
+        });
+    </script>
+</body>
+</html>
