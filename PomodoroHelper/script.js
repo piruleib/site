@@ -179,7 +179,12 @@ apply.addEventListener('click', function () {
     lbreakMin = parseInt(document.getElementById('lbreakMin').value) || 15;
 
     if (pomodoroMin === 0 || sbreakMin === 0 || lbreakMin === 0) {
-        document.getElementById('msg').innerHTML = "O valor deve ser diferente de 0.";
+        document.getElementById('msg').innerHTML = "O valor deve ser diferente ou maior que 0";
+        pomodoroMin = 15;
+        sbreakMin = 5;
+        lbreakMin = 15;
+    }else if(pomodoroMin < 0 || sbreakMin < 0 || lbreakMin < 0){
+        document.getElementById('msg').innerHTML = "O valor deve ser diferente ou maior que 0.";
         pomodoroMin = 15;
         sbreakMin = 5;
         lbreakMin = 15;
