@@ -214,7 +214,7 @@ body {
 }
 
 .aboutme {
-  height: 100vh;
+  height: 50vh;
   display: flex;
   flex-direction: row;
 
@@ -297,7 +297,7 @@ body {
   margin-top: 50px;
 }
 
-.pomodoro {
+.pomodoro{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -308,15 +308,34 @@ body {
   border-style: solid;
   border-radius: 20px;
   height: 500px;
-  width: 45%;
+  width: 95%;
 }
 
-.pomodoro p {
+.pervias{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: var(--boxcolor);
+  border-color: var(--boxborder);
+  border-width: 5px;
+  border-style: solid;
+  border-radius: 20px;
+  height: 500px;
+  width: 95%;
+}
+
+
+.pomodoro p, .pervias p {
   text-align: center;
 }
 
 .pomodoro img {
-  height: 100px;
+  height: 250px;
+}
+
+.pervias img{
+  height: 250px;
 }
 
 footer {
@@ -334,6 +353,10 @@ a{
   color: white;
   font-family: var(--popins);
   text-decoration: none;
+}
+
+#p2{
+  font-size: 25px;
 }
 
 @media (max-width: 768px) {
