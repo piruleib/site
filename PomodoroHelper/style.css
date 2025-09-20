@@ -27,6 +27,8 @@
     --modal-text: #212529;
     --modal-header-bg: #3a506b;
     --modal-border: #dee2e6;
+    --timer-text: #4a5a6a;
+    --timer-alert: red;
 }
 
 .dark-mode {
@@ -52,6 +54,8 @@
     --modal-text: #e9ecef;
     --modal-header-bg: #1a237e;
     --modal-border: #2d2d2d;
+    --timer-text: #cccccc;
+    --timer-alert: #ff6b6b;
 }
 
 body {
@@ -516,7 +520,22 @@ header img {
 .timer-countdown span {
     font-size: 25dvh;
     font-weight: bold;
-    color: var(--text-color);
+    color: var(--timer-text);
+    transition: color 0.3s ease;
+}
+
+.timer-text-normal {
+    color: var(--timer-text) !important;
+}
+
+.timer-text-alert {
+    color: var(--timer-alert) !important;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0.7; }
 }
 
 .about {
@@ -756,11 +775,19 @@ input[type="number"] {
     }
 
     main .timer-countdown span {
-        font-size: 17dvh;
+        font-size: 13dvh;
+    }
+
+    #pomodoro, #shortbreak, #longbreak, #start, #stop, #restart {
+        font-size: 2.5dvh;
     }
     
     .timer, .about {
         margin: 20px 10px;
+    }
+    iframe{
+        height: 23dvh;
+        width: 95%;
     }
 }
 
