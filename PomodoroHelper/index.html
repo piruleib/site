@@ -7,73 +7,110 @@
     <title>PomodoroHelper</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="icon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="container">
-        <header>
-            <img src="images/logo.png" alt="">
-        </header>
-        <main>
-            <div class="displaysettings" id="displaysettings">
-                <div class="settings" id="settingsDiv">
-                    <p>Definir minutos do pomodoro:</p>
-                    <input type="number" name="pomodoroMin" id="pomodoroMin" placeholder="5">
-                    <p>Definir minutos da pausa curta:</p>
-                    <input type="number" name="sbreakMin" id="sbreakMin" placeholder="5">
-                    <p>Definir minutos da pausa longa:</p>
-                    <input type="number" name="lbreakMin" id="lbreakMin" placeholder="15">
-                    <button class="btn-not-selected" id="apply" style="height: 10dvh; width: 10%; border-radius: 15px;">Definir</button>
-                    <span id="msg"></span>
+    <!-- Remova a div container e coloque o conteúdo diretamente -->
+    <header>
+        <div class="header-content">
+            <div class="header-logo">
+                <img src="images/logo.png" alt="PomodoroHelper Logo" id="logo">
+            </div>
+            <div class="header-buttons">
+                <button id="modeToggle" class="theme-toggle">
+                    <span id="modeIcon">🌙</span>
+                </button>
+                <button type="button" class="btn btn-primary settings-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Configurações
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Configurações</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Definir minutos do pomodoro:</p>
+                        <input type="number" name="pomodoroMin" id="pomodoroMin" placeholder="5">
+                        <p>Definir minutos da pausa curta:</p>
+                        <input type="number" name="sbreakMin" id="sbreakMin" placeholder="5">
+                        <p>Definir minutos da pausa longa:</p>
+                        <input type="number" name="lbreakMin" id="lbreakMin" placeholder="15">
+                        <span id="msg"></span>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="close2">Fechar</button>
+                        <button type="button" class="btn btn-primary" id="apply">Salvar</button>
+                    </div>
                 </div>
             </div>
-            <div class="settingsbutton">
-            <button class="settings-btn" id="settings">Configurações</button>
+        </div>
+        
+        <div class="timer">
+            <div class="buttons1">
+                <button id="pomodoro" class="btn-selected">POMODORO</button>
+                <button id="shortBreak" class="btn-not-selected">PAUSA CURTA</button>
+                <button id="longBreak" class="btn-not-selected">PAUSA LONGA</button>
             </div>
-            <div class="timer">
-                <div class="buttons1">
-                    <button id="pomodoro" class="btn-selected">POMODORO</button>
-                    <button id="shortBreak" class="btn-not-selected">PAUSA CURTA</button>
-                    <button id="longBreak" class="btn-not-selected">PAUSA LONGA</button>
-                </div>
-                <div class="timer-countdown">
-                    <span id="timerResult"></span>
-                </div>
-                <div class="buttons2">
-                    <button id="start" class="btn-start" onclick="timer()">INICIAR</button>
-                    <button id="stop" class="btn-selected">PARAR</button>
-                    <button id="restart" class="btn-not-selected">REINICIAR</button>
+            <div class="timer-countdown">
+                <span id="timerResult"></span>
+            </div>
+            <div class="buttons2">
+                <button id="start" class="btn-start" onclick="timer()">INICIAR</button>
+                <button id="stop" class="btn-selected">PARAR</button>
+                <button id="restart" class="btn-not-selected">REINICIAR</button>
+            </div>
+        </div>
+        
+        <div class="about">
+            <div class="text">
+                <h1>O que é a "Técnica Pomodoro"?</h1>
+                <p>A Técnica Pomodoro é um método de gestão de tempo criado por Francesco Cirillo no final dos anos
+                    1980. A ideia é dividir o trabalho em blocos de tempo — geralmente de 25 minutos — chamados de
+                    pomodoros, seguidos por breves pausas. Após completar alguns ciclos, faz-se uma pausa mais
+                    longa. Esse método ajuda a aumentar a concentração, reduzir distrações e tornar o trabalho mais
+                    produtivo. A prática regular também melhora a percepção do tempo e promove um ritmo de trabalho
+                    mais sustentável.</p>
+                <h1>Passos básicos da Técnica Pomodoro:</h1>
+                <p>1 - Escolha uma tarefa.<br>2 - Trabalhe nela por 25 minutos (1 pomodoro).<br>3 - Faça uma pausa
+                    de 5 minutos.<br>4 - Repita o ciclo. Após 4 pomodoros, faça uma pausa mais longa (15 a 30
+                    minutos).</p>
+                <h1>O que é o PomodoroHelper?</h1>
+                <p>PomodoroTimer é seu site/aplicativo para utilizar a Técnica Pomodoro. PomodoroHelper foi criado
+                    por um estudante com a intenção de facilitar seus estudos. No PomodoroHelper, você pode
+                    personalizar o cronômetro para que você possa trabalhar no seu próprio tempo.</p>
+            </div>
+        </div>
 
-                </div>
+        <div class="about">
+            <div class="text">
+                <h1>Expoetec 2025</h1>
+                <p>O projeto PomodoroHelper será apresentado na Expoetec 2025 da ETEC Dr. Carolino da Motta e Silva (Espírito Santo do Pinhal - SP)</p>
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/q-1Iv8C722U?si=sTmIwsmuoShZKkCO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
             </div>
-            <div class="about">
-                <div class="text">
-                    <h1>O que é a "Técnica Pomodoro"?</h1>
-                    <p>A Técnica Pomodoro é um método de gestão de tempo criado por Francesco Cirillo no final dos anos
-                        1980. A ideia é dividir o trabalho em blocos de tempo — geralmente de 25 minutos — chamados de
-                        pomodoros, seguidos por breves pausas. Após completar alguns ciclos, faz-se uma pausa mais
-                        longa. Esse método ajuda a aumentar a concentração, reduzir distrações e tornar o trabalho mais
-                        produtivo. A prática regular também melhora a percepção do tempo e promove um ritmo de trabalho
-                        mais sustentável.</p>
-                    <h1>Passos básicos da Técnica Pomodoro:</h1>
-                    <p>1 - Escolha uma tarefa.<br>2 - Trabalhe nela por 25 minutos (1 pomodoro).<br>3 - Faça uma pausa
-                        de 5 minutos.<br>4 - Repita o ciclo. Após 4 pomodoros, faça uma pausa mais longa (15 a 30
-                        minutos).</p>
-                    <h1>O que é o PomodoroHelper?</h1>
-                    <p>PomodoroTimer é seu site/aplicativo para utilizar a Técnica Pomodoro. PomodoroHelper foi criado
-                        por um estudante com a intenção de facilitar seus estudos. No PomodoroHelper, você pode
-                        personalizar o cronômetro para que você possa trabalhar no seu próprio tempo.</p>
-                </div>
-            </div>
-        </main>
-        <footer>
-            <h5>PomodoroHelper v1.0<br>© 2025 - devpiruleib. Todos os direitos reservados.</h5><a href="https://piruleib.github.io/site" target="_blank">meu site pessoal</a>
-        </footer>
-    </div>
+        </div>
+    </main>
+    
+    <footer>
+        <h5>PomodoroHelper v2.0<br>© 2025 - devpiruleib. Todos os direitos reservados.</h5>
+        <a href="https://piruleib.github.io/site" target="_blank">meu site pessoal</a>
+    </footer>
+    
     <audio id="alert">
         <source src="sounds/alarmsound.mp3" type="audio/mp3">
     </audio>
+    
     <script src="script.js"></script>
+    <script src="theme.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 
 </html>

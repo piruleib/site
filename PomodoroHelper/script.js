@@ -153,24 +153,6 @@ let _closeCheck = 0;
 
 
 
-settings.addEventListener('click', function () {
-    setChecker++;
-    if (setChecker === 1) {
-        displaySettings.style.display = 'block';
-        requestAnimationFrame(() => {
-            settingsDiv.style.height = '70dvh';
-        });
-    }
-    if (setChecker === 2) {
-        settingsDiv.style.height = '0';
-        settingsDiv.addEventListener('transitionend', function handler() {
-            displaySettings.style.display = 'none';
-            settingsDiv.removeEventListener('transitionend', handler);
-        });
-        setChecker = 0;
-    }
-});
-
 let apply = document.getElementById('apply');
 
 apply.addEventListener('click', function () {
@@ -189,8 +171,15 @@ apply.addEventListener('click', function () {
         sbreakMin = 5;
         lbreakMin = 15;
     } else {
-        document.getElementById('msg').innerHTML = " ";
+        document.getElementById('msg').innerHTML = "Configurações aplicadas!";
     }
+
+    document.getElementById('close').addEventListener('click', function () {
+    document.getElementById('msg').innerHTML = "";
+    });
+    document.getElementById('close2').addEventListener('click', function () {
+    document.getElementById('msg').innerHTML = "";
+    });
 
     if (pomodoro.className === 'btn-selected') {
         min = pomodoroMin;
@@ -208,3 +197,34 @@ apply.addEventListener('click', function () {
     let formattedSec = sec < 10 ? '0' + sec : sec;
     document.getElementById('timerResult').innerHTML = formattedMin + ':' + formattedSec;
 });
+
+// Função para alternar entre light e dark mode
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            
+            // Atualizar o ícone e texto do botão
+            const modeIcon = document.getElementById('modeIcon');
+            if (document.body.classList.contains('dark-mode')) {
+                modeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                modeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+        
+        // Verificar preferência salva ao carregar a página
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const modeIcon = document.getElementById('modeIcon');
+            
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-mode');
+                modeIcon.textContent = '☀️';
+            } else {
+                modeIcon.textContent = '🌙';
+            }
+            
+            // Adicionar evento de clique ao botão
+            document.getElementById('modeToggle').addEventListener('click', toggleDarkMode);
+        });

@@ -4,9 +4,289 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg-color: #f6fafd;
+    --text-color: #212529;
+    --header-bg: #3a506b;
+    --card-bg: #ffffff;
+    --timer-bg: #e8f1fb;
+    --border-color: #dee2e6;
+    --btn-bg: #e9ecef;
+    --btn-text: #212529;
+    --modal-bg: #ffffff;
+    --modal-text: #212529;
+    --footer-bg: transparent;
+    --footer-text: #4a5a6a;
+    --btn-not-selected: #5c9ead;
+    --btn-selected: #ff6b6b;
+    --btn-start: #9ddf69;
+    --shadow-color: #a8c3e2;
+    --about-text: #4a5a6a;
+    --about-heading: #3a506b;
+    --modal-bg: #ffffff;
+    --modal-text: #212529;
+    --modal-header-bg: #3a506b;
+    --modal-border: #dee2e6;
+}
+
+.dark-mode {
+    --bg-color: #121212;
+    --text-color: #e9ecef;
+    --header-bg: #1a237e;
+    --card-bg: #1e1e1e;
+    --timer-bg: #2d2d2d;
+    --border-color: #2d2d2d;
+    --btn-bg: #2d2d2d;
+    --btn-text: #e9ecef;
+    --modal-bg: #1e1e1e;
+    --modal-text: #e9ecef;
+    --footer-bg: #1a1a1a;
+    --footer-text: #b0b0b0;
+    --btn-not-selected: #3a506b;
+    --btn-selected: #d32f2f;
+    --btn-start: #388e3c;
+    --shadow-color: #000000;
+    --about-text: #cccccc;
+    --about-heading: #bbbbbb;
+    --modal-bg: #1e1e1e;
+    --modal-text: #e9ecef;
+    --modal-header-bg: #1a237e;
+    --modal-border: #2d2d2d;
+}
+
 body {
-    background-color: #f6fafd;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-family: "Segoe UI", Geneva, Arial, Helvetica, sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    background-color: var(--bg-color);
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.container > * {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Backdrop do modal para dark mode */
+.modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.dark-mode .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.dark-mode .modal-backdrop.show {
+    opacity: 0.85;
+}
+
+/* CORREÇÃO ESPECÍFICA PARA O MODAL FOOTER NO DARK MODE */
+.dark-mode .modal-footer {
+    background-color: var(--modal-bg) !important;
+    border-top: 1px solid var(--border-color) !important;
+}
+
+.dark-mode .modal-footer .btn-secondary {
+    background-color: #5a6268 !important;
+    border-color: #545b62 !important;
+    color: white !important;
+}
+
+.dark-mode .modal-footer .btn-primary {
+    background-color: #0b5ed7 !important;
+    border-color: #0a58ca !important;
+}
+
+/* Garantir que os botões do footer tenham contraste suficiente */
+.dark-mode .modal-footer .btn {
+    color: white !important;
+}
+
+/* Se ainda não funcionar, use esta versão mais específica */
+body.dark-mode .modal-footer {
+    background-color: #1e1e1e !important;
+    border-top: 1px solid #2d2d2d !important;
+}
+
+body.dark-mode .modal-content .modal-footer {
+    background-color: inherit !important;
+}
+
+/* Solução alternativa usando seletores mais específicos */
+.modal-content.dark-mode-footer .modal-footer,
+body.dark-mode .modal-content .modal-footer {
+    background-color: var(--modal-bg) !important;
+    border-top: 1px solid var(--border-color) !important;
+}
+
+/* Forçar a cor dos botões no dark mode */
+body.dark-mode .modal-footer .btn-secondary {
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+}
+
+body.dark-mode .modal-footer .btn-primary {
+    background-color: #0d6efd !important;
+    border-color: #0d6efd !important;
+}
+
+#logo{
+    transform: scale(0.6) !important;
+    max-height: 100px !important;
+}
+/* Garantir que o fundo do body também mude no dark mode */
+body.dark-mode {
+    background-color: var(--bg-color) !important;
+}
+
+/* Se ainda houver problemas com o fundo, force a cor */
+body {
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease;
+}
+
+/* Ajuste adicional para garantir que todo o conteúdo esteja com o fundo correto */
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+}
+
+/* Garantir que o modal content também herde as cores corretas */
+.modal-content {
+    background-color: var(--modal-bg);
+    color: var(--modal-text);
+}
+
+.modal-header {
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.modal-body {
+    background-color: var(--modal-bg);
+}
+
+.modal-footer {
+    background-color: var(--modal-bg);
+    border-top: 1px solid var(--border-color);
+}
+
+header, footer {
+    width: 100%;
+}
+
+header {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+}
+
+.dark-mode header {
+    background-color: var(--header-bg);
+}
+
+/* Modal styles for dark mode - ATUALIZADO */
+.modal-content {
+    background-color: var(--modal-bg);
+    color: var(--modal-text);
+    border: 1px solid var(--modal-border);
+}
+
+.modal-header {
+    background-color: var(--modal-header-bg);
+    color: white;
+    border-bottom: 1px solid var(--modal-border);
+}
+
+.modal-footer {
+    border-top: 1px solid var(--modal-border);
+    background-color: var(--modal-bg);
+}
+
+.modal-body {
+    background-color: var(--modal-bg);
+}
+
+/* Ajustes específicos para os elementos dentro do modal */
+.modal-body p {
+    color: var(--modal-text);
+    margin-bottom: 0.5rem;
+}
+
+.modal-body input[type="number"] {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 200px;
+    margin-bottom: 1rem;
+}
+
+/* Ajuste para o botão de fechar no dark mode */
+.dark-mode .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Ajuste para os botões do modal */
+.modal-footer .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.dark-mode .modal-footer .btn-secondary {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.modal-footer .btn-primary {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.dark-mode .modal-footer .btn-primary {
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+
+/* Ajuste para o título do modal */
+.modal-title {
+    color: white;
+}
+
+.dark-mode .modal-title {
+    color: var(--text-color);
 }
 
 .message {
@@ -18,36 +298,123 @@ body {
     position: absolute;
 }
 
-main {
-    font-size: 22px;
-
-    p {
-        color: #3a506b;
-    }
-
-    text-align: center;
+modal-body{
+    display: flex;
+    flex-direction: column;
 }
 
+main {
+    font-size: 22px;
+    text-align: center;
+    width: 100%;
+    padding: 0 15px;
+}
+
+main p {
+    color: var(--about-text);
+}
+
+/* HEADER STYLES - UPDATED */
 header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     height: 15dvh;
+    min-height: 100px;
+    width: 100% !important;
+    background-color: var(--header-bg);
+    padding: 0 20px;
+    position: relative;
+}
+
+
+
+header {
+    width: 100vw; /* garante 100% da tela */
+    left: 0;
+    top: 0;
+    margin: 0;
+    padding: 0 20px;
+    background-color: var(--header-bg);
+}
+
+
+.header-content {
+    display: flex;
+    align-items: center;
     width: 100%;
-    background-color: #3a506b;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 
-    button {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 3dvh;
-        font-weight: bold;
-        position: relative;
-    }
+.header-logo {
+    display: flex;
+    align-items: center;
+}
 
-    img {
-        transform: scale(0.35);
-    }
+html, body {
+    width: 100%;
+    min-height: 100vh; /* cobre 100% da altura */
+    background-color: var(--bg-color); /* pega a cor do tema */
+    color: var(--text-color);
+}
+
+.container {
+    background-color: var(--bg-color); /* usa var */
+}
+
+header img {
+    transform: scale(0.35);
+    max-height: 100px;
+}
+
+.header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.theme-toggle {
+    background: none;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    font-size: 2.5dvh;
+    font-weight: bold;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.settings-btn {
+    justify-content: center;
+    align-items: center;
+    background-color: var(--header-bg);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    height: 50px;
+    min-width: 120px;
+    display: flex;
+    font-size: 2.2dvh;
+    font-weight: bold;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.settings-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: white;
 }
 
 .buttons1 {
@@ -56,12 +423,11 @@ header {
     justify-content: center;
     height: 15dvh;
     width: 100%;
+}
 
-    button {
-        height: 8dvh;
-        width: 25%;
-    }
-
+.buttons1 button {
+    height: 8dvh;
+    width: 25%;
 }
 
 .buttons2 {
@@ -70,15 +436,15 @@ header {
     justify-content: center;
     min-height: 1dvh;
     width: 100%;
+}
 
-    button {
-        height: 8dvh;
-        width: 25%;
-    }
+.buttons2 button {
+    height: 8dvh;
+    width: 25%;
 }
 
 .btn-not-selected {
-    background-color: #5c9ead;
+    background-color: var(--btn-not-selected);
     color: white;
     border: none;
     font-weight: bold;
@@ -89,7 +455,7 @@ header {
 .btn-not-selected:hover,
 .btn-selected:hover {
     transform: scale(1.1);
-    background-color: #ff6b6b;
+    background-color: var(--btn-selected);
     box-shadow: 0 0 10px 5px rgba(225, 107, 107, 0.7);
     color: white;
     border: none;
@@ -109,7 +475,7 @@ header {
 
 .btn-selected {
     transition: 0.5s;
-    background-color: #ff6b6b;
+    background-color: var(--btn-selected);
     color: white;
     border: none;
     font-weight: bold;
@@ -118,79 +484,112 @@ header {
 
 .btn-start {
     transition: 0.5s;
-    background-color: #9ddf69;
+    background-color: var(--btn-start);
     color: white;
     border: none;
     font-weight: bolder;
     font-size: 3dvh;
 }
 
+.timer {
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .timer-countdown {
-    background-color: #e8f1fb;
+    background-color: var(--timer-bg);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 40dvh;
-    box-shadow: 0 0 50px 0px #a8c3e2;
+    box-shadow: 0 0 50px 0px var(--shadow-color);
+    border-radius: 10px;
+}
 
-
-    span {
-        font-size: 25dvh;
-        font-weight: bold;
-    }
+.timer-countdown span {
+    font-size: 25dvh;
+    font-weight: bold;
+    color: var(--text-color);
 }
 
 .about {
     display: flex;
     flex-direction: column;
-    text-align: center; /* não funciona aaaaaaaa*/
+    text-align: center;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-    .text {
+.about .text {
     margin: 0 auto;
     text-align: center;
-        h1 {
-            color: #3a506b;
-        }
+}
 
-        p {
-            color: #4a5a6a;
-        }
+.about .text h1 {
+    color: var(--about-heading);
+}
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        width: 70%;
-        gap: 30px;
-        padding-top: 10dvh;
+.about .text p {
+    color: var(--about-text);
+}
 
-        p {
-            font-size: 20px;
-        }
-    }
+.about .text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 70%;
+    gap: 30px;
+    padding-top: 10dvh;
+}
+
+.about .text p {
+    font-size: 20px;
 }
 
 footer {
-    margin: 30px;
+    margin: 30px 15px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    h5, a{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: normal;
-        color: #4a5a6a;
-        text-decoration: none;
-    }
-    a{
-        font-size: 13px;
-    }
+    background-color: var(--footer-bg);
+    padding: 15px;
+    border-radius: 5px;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-    a:hover{
-        text-decoration: underline;
-    }
+footer h5, footer a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: normal;
+    color: var(--footer-text);
+    text-decoration: none;
+}
+
+footer a {
+    font-size: 13px;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
 
 #settingsDiv {
@@ -198,7 +597,6 @@ footer {
     height: 0;
     transition: height 0.5s ease;
 }
-
 
 .settings {
     height: 0dvh;
@@ -209,24 +607,25 @@ footer {
     justify-content: center;
     align-items: center;
     gap: 20px;
+}
 
-    input {
-        width: 10%;
-        height: 6dvh;
-        border: 3px solid #ffe0e0;
-        border-radius: 10px;
-        padding: 1vh;
-        color: #4a5a6a;
-    }
+.settings input {
+    width: 10%;
+    height: 6dvh;
+    border: 3px solid #ffe0e0;
+    border-radius: 10px;
+    padding: 1vh;
+    color: var(--about-text);
+    background-color: var(--card-bg);
+}
 
-    p {
-        color: #4a5a6a;
-        font-size: 30px;
-    }
+.settings p {
+    color: var(--about-text);
+    font-size: 30px;
 }
 
 span {
-    color: #4a5a6a;
+    color: var(--about-text);
 }
 
 .displaysettings {
@@ -239,70 +638,166 @@ span {
     justify-content: flex-end;
 }
 
-.settings-btn {
-    justify-content: center;
-    align-items: center;
-    background-color: #3a506b;
-    border: none;
-    color: white;
-    height: 7dvh;
-    width: 13%;
-    display: flex;
-    font-size: 3dvh;
-    font-weight: bold;
+/* Modal styles for dark mode */
+.modal-content {
+    background-color: var(--modal-bg);
+    color: var(--modal-text);
 }
 
+.modal-header, .modal-footer {
+    border-color: var(--border-color);
+}
 
+.btn-close {
+    filter: invert(0);
+}
 
-/* me when responsividade */
+.dark-mode .btn-close {
+    filter: invert(1);
+}
+
+input[type="number"] {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    header img {
+        transform: scale(0.3);
+    }
+    
+    .theme-toggle {
+        width: 45px;
+        height: 45px;
+        font-size: 2.2dvh;
+    }
+    
+    .settings-btn {
+        height: 45px;
+        min-width: 110px;
+        font-size: 2dvh;
+    }
+}
+
+@media (max-width: 992px) {
+    .header-content {
+        flex-wrap: nowrap;
+    }
+    
+    header img {
+        transform: scale(0.25);
+    }
+    
+    .theme-toggle {
+        width: 40px;
+        height: 40px;
+        font-size: 2dvh;
+    }
+    
+    .settings-btn {
+        height: 40px;
+        min-width: 100px;
+        font-size: 1.8dvh;
+        padding: 0 10px;
+    }
+}
 
 @media (max-width: 768px) {
     header {
-        height: 15dvh;
-        display: flex;
-        justify-content: center;
+        height: auto;
+        min-height: 15dvh;
+        padding: 10px 15px;
         flex-direction: column;
-
-        img {
-            transform: scale(0.3);
-        }
+    }
+    
+    .header-content {
+        flex-direction: column;
+        gap: 15px;
+        padding: 10px 0;
+    }
+    
+    .header-logo {
+        order: 1;
+        margin-bottom: 10px;
+    }
+    
+    .header-buttons {
+        order: 2;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    header img {
+        transform: scale(0.25);
     }
 
-    .about{
-        .text{
-            padding-top: 5dvh;
-        }
-        
+    .about .text {
+        padding-top: 5dvh;
+        width: 90%;
     }
 
     .settingsbutton {
         justify-content: center;
-
-        .settings-btn {
-            width: 60%;
-        }
     }
 
-    main {
+    .settingsbutton .settings-btn {
+        width: 60%;
+    }
 
-        .buttons1,
-        .buttons2 {
-            button {
-                width: 50%;
-            }
-        }
+    main .buttons1 button,
+    main .buttons2 button {
+        width: 50%;
+    }
 
-        .timer-countdown {
+    main .timer-countdown {
+        height: 30dvh;
+    }
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 30dvh;
-
-            span {
-                font-size: 17dvh;
-                font-weight: bold;
-            }
-        }
+    main .timer-countdown span {
+        font-size: 17dvh;
+    }
+    
+    .timer, .about {
+        margin: 20px 10px;
     }
 }
+
+@media (max-width: 576px) {
+    .header-buttons {
+        flex-direction: row;
+        gap: 10px;
+        justify-content: space-between;
+    }
+    
+    .theme-toggle {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .settings-btn {
+        width: auto;
+        flex-grow: 1;
+        min-width: auto;
+    }
+    
+    .about .text {
+        width: 100%;
+        padding-top: 3dvh;
+    }
+    
+    .about .text p {
+        font-size: 18px;
+    }
+}
+
+#msg {
+    color: var(--about-text);
+    font-size: 20px;
+    height: 5dvh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
