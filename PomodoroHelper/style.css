@@ -721,6 +721,7 @@ input[type="number"] {
         font-size: 1.8dvh;
         padding: 0 10px;
     }
+    
 }
 
 @media (max-width: 768px) {
@@ -747,6 +748,8 @@ input[type="number"] {
         justify-content: center;
         width: 100%;
     }
+
+    
     
     header img {
         transform: scale(0.25);
@@ -778,10 +781,10 @@ input[type="number"] {
         font-size: 13dvh;
     }
 
-    #pomodoro, #shortbreak, #longbreak, #start, #stop, #restart {
+    #pomodoro, #start, #stop, #restart {
         font-size: 2.5dvh;
     }
-    
+
     .timer, .about {
         margin: 20px 10px;
     }
@@ -816,6 +819,9 @@ input[type="number"] {
     
     .about .text p {
         font-size: 18px;
+    }
+    button{
+        font-size: 4vw !important;
     }
 }
 
