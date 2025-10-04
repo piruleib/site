@@ -40,7 +40,7 @@ const levelsDatabase = {
     73667628: { name: "Acheron", downloads: 6500000, difficulty: 9 },
     71912451: { name: "RUST", downloads: 785000, difficulty: 9 },
     4284013: { name: "Nine Circles", downloads: 72800000, difficulty: 7 },
-    5310094: { name: "Fairydust", downloads: 900000, difficulty: 7 },
+    5310094: { name: "Fairydust", downloads: 9000000, difficulty: 7 },
     3543219: { name: "Speed Racer", downloads: 54200000, difficulty: 5 },
     6939821: { name: "Jawbreaker (Zenthic)", downloads: 15300000, difficulty: 7 },
     102765: { name: "Hextec Flow", downloads: 12300000, difficulty: 5 },
