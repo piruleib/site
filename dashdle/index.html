@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashdle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-screen">
+        <p>Loading levels...</p>
+    </div>
+
+    <!-- Score Display -->
+    <div class="score-display">
+        Score: <span id="scoreValue">0</span>
+    </div>
+
+    <div class="container">
+        <div class="logo">
+            <img src="img/logo.png" alt="">
+        </div>
+    </div>
+    <div class="welcome">
+        <p>Welcome to Dashdle! Try and guess which level has more downloads!</p><br>
+    </div>
+    <div class="boxes">
+        <div class="box" id="box1">
+            <img src="" id="diff1" alt="">
+            <span id="levelname1"></span>
+            <span id="downloads1"></span>
+        </div>
+        <div class="box" id="box2">
+            <img src="" id="diff2" alt="">
+            <span id="levelname2"></span>
+            <span id="downloads2"></span>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOverScreen" class="game-over-screen">
+        <div class="game-over-content">
+            <h2>Game Over!</h2>
+            <p>Your final score: <span id="finalScore">0</span></p>
+            <button id="restartButton" class="restart-btn">Play Again</button>
+        </div>
+    </div>
+
+    <div class="accwarni">
+        <p>This data is NOT 100% accurate, unfortunately. I tried to insert GDColon's api but its rate limit is too strict.</p>
+    </div>
+
+    <div class="credits">
+        <p>Website developed by <a href="https://youtube.com/@piruleib">devpiruleib</a></p>
+        <p>Assets by <a href="https://youtube.com/@RobTopGames">RobTop Games</a>, taken at <a href="https://gdbrowser.com">GDBrowser</a></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
