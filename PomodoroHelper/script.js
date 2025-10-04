@@ -6,15 +6,15 @@
 
 // variáveis globais
 
-let min = 15;
+let min = 25;
 let sec = 0;
-let initialMin = 15;
+let initialMin = 25;
 let initialSec = 0;
 let shouldStop = false;
 let shortBreak = document.getElementById("shortBreak");
 let longBreak = document.getElementById("longBreak");
 let pomodoro = document.getElementById("pomodoro");
-let pomodoroMin = document.getElementById("pomodoroMin").value ?? "15";
+let pomodoroMin = document.getElementById("pomodoroMin").value ?? "25";
 let sbreakMin = document.getElementById("sbreakMin").value ?? "5";
 let lbreakMin = document.getElementById("lbreakMin").value ?? "15";
 let blinkingInterval = null;
@@ -25,7 +25,7 @@ const startButton = document.getElementById("start");
 const stopButton = document.getElementById("stop");
 const restart = document.getElementById("restart");
 
-pomodoroMin = parseInt(document.getElementById("pomodoroMin").value) || 15;
+pomodoroMin = parseInt(document.getElementById("pomodoroMin").value) || 25;
 sbreakMin = parseInt(document.getElementById("sbreakMin").value) || 5;
 lbreakMin = parseInt(document.getElementById("lbreakMin").value) || 15;
 
@@ -162,20 +162,20 @@ let _closeCheck = 0;
 let apply = document.getElementById("apply");
 
 apply.addEventListener("click", function () {
-  pomodoroMin = parseInt(document.getElementById("pomodoroMin").value) || 15;
+  pomodoroMin = parseInt(document.getElementById("pomodoroMin").value) || 25;
   sbreakMin = parseInt(document.getElementById("sbreakMin").value) || 5;
   lbreakMin = parseInt(document.getElementById("lbreakMin").value) || 15;
 
   if (pomodoroMin === 0 || sbreakMin === 0 || lbreakMin === 0) {
     document.getElementById("msg").innerHTML =
       "O valor deve ser diferente ou maior que 0";
-    pomodoroMin = 15;
+    pomodoroMin = 25;
     sbreakMin = 5;
     lbreakMin = 15;
   } else if (pomodoroMin < 0 || sbreakMin < 0 || lbreakMin < 0) {
     document.getElementById("msg").innerHTML =
       "O valor deve ser diferente ou maior que 0.";
-    pomodoroMin = 15;
+    pomodoroMin = 25;
     sbreakMin = 5;
     lbreakMin = 15;
   } else {
