@@ -1,112 +1,676 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu portfólio</title>
-    <link rel="stylesheet" href="./assets/style.css">
-    <script src="./assets/script.js" defer></script>
-    <script src="https://unpkg.com/scrollreveal"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Gabriel Bernardo | Desenvolvedor Front-end</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #00ADB5;
+            --primary-dark: #009199;
+            --dark: #222831;
+            --darker: #161a20;
+            --light: #EEEEEE;
+            --gray: #393E46;
+            --transition: all 0.3s ease;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            --radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .section-title span {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(34, 40, 49, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero-text h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #cccccc;
+        }
+
+        .hero-image {
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .hero-image:hover img {
+            transform: translateY(-10px);
+        }
+
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--primary);
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0) translateX(-50%);
+            }
+            40% {
+                transform: translateY(-10px) translateX(-50%);
+            }
+            60% {
+                transform: translateY(-5px) translateX(-50%);
+            }
+        }
+
+        .about {
+            background: var(--darker);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: #cccccc;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: var(--darker);
+            padding: 30px;
+            border-radius: var(--radius);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary);
+        }
+
+        .skill-card i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .projects {
+            background: var(--darker);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--dark);
+            border-radius: var(--radius);
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .project-content p {
+            margin-bottom: 20px;
+            color: #cccccc;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .project-links a {
+            padding: 8px 20px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .project-links a:hover {
+            background: var(--primary-dark);
+        }
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--light);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            background: var(--darker);
+        }
+
+        .contact-link:hover {
+            color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .contact-link i {
+            font-size: 1.5rem;
+        }
+
+        footer {
+            background: var(--darker);
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content p {
+            margin-bottom: 10px;
+            color: #cccccc;
+        }
+
+        @media (max-width: 968px) {
+            .hero-content, .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-text h1 {
+                font-size: 2.3rem;
+            }
+
+            .hero-text h2 {
+                font-size: 1.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .skill-card, .project-card {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
-
 <body>
-    <div class="container">
-        <header>
-            <div class="menu1">
-                <h1>Portfólio</h1>
+    <!-- Header -->
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#home" class="logo">Gabriel<span>.</span></a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">Sobre</a>
+                <a href="#skills">Conhecimentos</a>
+                <a href="#projects">Projetos</a>
+                <a href="#contact">Contato</a>
+            </nav>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
             </div>
-            <div class="menubetween">
+        </div>
+    </header>
 
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Olá, eu sou <span style="color: #00ADB5;">Gabriel Bernardo</span></h1>
+                <h2>Desenvolvedor Front-end</h2>
+                <p>Desenvolvedor com foco em sites.</p>
+                <a href="#projects" class="btn">Ver Projetos</a>
             </div>
-            <div class="menu2">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#aboutme">Sobre mim</a></li>
-                    <li><a href="#conhecimentos">Conhecimentos e projetos</a></li>
-                </ul>
+            <div class="hero-image">
+                <img src="./assets/img/selfimg.png" alt="Gabriel Bernardo">
             </div>
-        </header>
-        <main id="home">
-            <div class="titlemain">
-                <div class="title"></div>
-                <div class="text">
-                        <h1 class="animated-text" style="color: white">OLÁ, SOU</h1>
-                        <h1 class="animated-text" style="color: #00ADB5">GABRIEL BERNARDO</h1>
-                        <h3 class="animated-text">Desenvolvedor front-end</h3>
+        </div>
+        <a href="#about" class="scroll-down">
+            <i class="fas fa-chevron-down"></i>
+        </a>
+    </section>
+
+    <!-- Sobre Mim -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Sobre <span>Mim</span></h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="./assets/img/programming-1873854_1280.png" alt="Sobre mim">
+                </div>
+                <div class="about-text">
+                    <h3>Desenvolvedor Front-end & Estudante do Ensino Médio</h3>
+                    <p>Sou um desenvolvedor front-end apaixonado pelo que faço. Comecei com 15 anos, fazendo um curso técnico de programação integrado ao ensino médio. Ainda faço esse curso, estando no segundo ano do Ensino Médio. Desde então, me identifiquei com desenvolvimento web e front-end.</p>
+                    <p>Após o término do ensino médio, pretendo fazer faculdade de ciência da computação para aprofundar meus conhecimentos e me tornar um desenvolvedor ainda mais completo.</p>
+                    <p>Amo transformar ideias em realidade através do código, sempre buscando as melhores práticas e tecnologias mais recentes.</p>
+                    <a href="#contact" class="btn">Entre em Contato</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Conhecimentos -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Meus <span>Conhecimentos</span></h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <i class="fab fa-html5"></i>
+                    <h3>HTML5</h3>
+                    <p>Estruturação semântica e acessível de páginas web</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-css3-alt"></i>
+                    <h3>CSS3</h3>
+                    <p>Estilização moderna com Flexbox, Grid e animações</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-js-square"></i>
+                    <h3>JavaScript</h3>
+                    <p>Interatividade e lógica de programação front-end</p>
+                </div>
+                <div class="skill-card">
+                    <i class="fab fa-php"></i>
+                    <h3>PHP</h3>
+                    <p>Desenvolvimento back-end e integração com bancos de dados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projetos -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Meus <span>Projetos</span></h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/img/pomodoro.png" alt="PomodoroHelper">
                     </div>
-                <img id="selfimg" class="animation-img" src="assets/img/selfimg.png" alt="">
-            </div>
-            <button id="setabaixo"></button>
-            <div class="aboutme" id="aboutme">
-                <div class="abouttext">
-                    <div class="text two">
-                        <div class="title about">
-                            <h1 style="color: white">SOBRE&nbsp;</h1>
-                            <h1 style="color: #00ADB5">MIM</h1>
+                    <div class="project-content">
+                        <h3>PomodoroHelper</h3>
+                        <p>Site que disponibiliza um timer personalizável para a utilização da técnica pomodoro, ajudando na produtividade e gestão do tempo.</p>
+                        <div class="project-links">
+                            <a href="https://piruleib.github.io/site/PomodoroHelper/" target="_blank">Ver Projeto</a>
                         </div>
                     </div>
-                    <p id="p2">Sou um desenvolvedor front-end apaixonado pelo que faço. Comecei com 15 anos, fazendo um curso técnico de programação integrado ao ensino médio. Desde lá, me identifiquei com desenvolvimento web e front-end. Após o fim do ensino médio, pretendo fazer faculdade de ciência da computação.</p>
                 </div>
-                <img src="./assets/img/imgaboutme.png" id="imgabout" alt="">
-            </div>
-            <div class="especialidades" id="conhecimentos">
-                <div class="title ttl-especialidades-projetos">
-                    <h1 style="color: white">CONHECI</h1>
-                    <h1 style="color: #00ADB5">MENTOS</h1>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/img/pervias.png" alt="PerVIAs">
+                    </div>
+                    <div class="project-content">
+                        <h3>PerVIAs</h3>
+                        <p>Mapa interativo que disponibiliza locais de acessibilidade nas cidades, facilitando a mobilidade de pessoas com necessidades especiais.</p>
+                        <div class="project-links">
+                            <a href="https://piruleib.github.io/site/PerVIAs/" target="_blank">Ver Projeto</a>
+                        </div>
+                    </div>
                 </div>
-                <p>Estas são as linguagens que possuo conhecimento.</p>
-                <div class="linguagens">
-                    <ul>
-                        <li><i class="fa-brands fa-html5 fa-4x" style="color: #00adb5;"><p>HTML</p></i></li>
-                        <li><i class="fa-brands fa-css fa-4x" style="color: #00adb5;"><p>CSS</p></i></li>
-                        <li><i class="fa-brands fa-square-js fa-4x" style="color: #00adb5;"><p>JavaScript</p></i></li>
-                        <li><i class="fa-brands fa-php fa-4x" style="color: #00adb5"><p>PHP</p></i></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="projetos">
-                <div class="title ttl-especialidades-projetos">
-                    <h1 style="color: white">PRO</h1>
-                    <h1 style="color: #00ADB5">JETOS</h1>
-                </div>
-                <p>Meus projetos</p>
-                <div class="linguagens">
-                    <ul>
-                        <li><div class="pomodoro" id="pomodoro">
-                            <img src="assets/img/pomodoro.png" alt="" id="img-pmdr">
-                            <h1><a href="https://piruleib.github.io/site/PomodoroHelper/">PomodoroHelper</a></h1>
-                            <p>Site que disponibiliza um timer personalizável para a utilização da técnica pomodoro.</p>
-                        </div></li>
-                        <li><div class="pervias" id="pervias">
-                            <img src="assets/img/pervias.png" alt="" id="img-prvs">
-                            <h1><a href="https://piruleib.github.io/site/PerVIAs/">PerVIAs</a></h1>
-                            <p>Mapa que disponibiliza locais de acessibilidade nas cidades.</p>
-                        </div></li>
-                        <li><div class="globus" id="globus">
-                            <img src="assets/img/projetoglobus.png" alt="" id="img-glbs">
-                            <h1><a href="https://projetoglobus.tech">Projeto Globus</a></h1>
-                            <p>Simulações da ONU na ETEC Pinhal</p>
-                        </div></li>
-                    </ul>
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="./assets/img/projetoglobus.png" alt="Projeto Globus">
+                    </div>
+                    <div class="project-content">
+                        <h3>Projeto Globus</h3>
+                        <p>Site informativo sobre o Projeto Globus, projeto realizado na ETEC Dr. Carolino da Motta e Silva, em Espírito Santo do Pinhal, onde eu estudo.</p>
+                        <div class="project-links">
+                            <a href="https://projetoglobus.tech" target="_blank">Ver Projeto</a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </main>
-        <footer>
-            <h2>CONTATO</h2>
-            <p>E-mail: gbernardodev@gmail.com</p>
-            <p>GitHub: <a href="https://github.com/piruleib">piruleib</a></p>
-            <p>Twitter & Instagram: gbernardo_dev</p>
-            <p>Esse é o teste 1</p>
-        </footer>
-    </div>
-</body>
+        </div>
+    </section>
 
+    <!-- Contato -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Entre em <span>Contato</span></h2>
+            <p style="text-align: center; margin-bottom: 30px; font-size: 1.2rem;">Quer entrar em contato? Essas são as redes sociais:</p>
+            <div class="contact-links">
+                <a href="mailto:gbernardodev@gmail.com" class="contact-link">
+                    <i class="fas fa-envelope"></i>
+                    <span>ghbsetec@gmail.com</span>
+                </a>
+                <a href="https://github.com/piruleib" target="_blank" class="contact-link">
+                    <i class="fab fa-github"></i>
+                    <span>github.com/piruleib</span>
+                </a>
+                <a href="#" class="contact-link">
+                    <i class="fab fa-twitter"></i>
+                    <span>@luadenetunonoar</span>
+                </a>
+                <a href="#" class="contact-link">
+                    <i class="fab fa-instagram"></i>
+                    <span>@gbernardo_dev</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2025 Gabriel Bernardo. Todos os direitos reservados.</p>
+            <p>Desenvolvido com o ❤️</p>
+        </div>
+    </footer>
+
+    <script>
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    if (window.innerWidth <= 768) {
+                        document.querySelector('.nav-links').style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const elementsToAnimate = document.querySelectorAll('.skill-card, .project-card, .about-content > div');
+            elementsToAnimate.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
 </html>
