@@ -497,130 +497,295 @@ footer a:hover {
   text-decoration: underline;
 }
 
-/* RESPONSIVIDADE */
+/* ===== RESPONSIVIDADE ===== */
+
+/* TABLET (1024px para baixo) */
 @media (max-width: 1024px) {
+  /* Header */
+  header {
+    padding: 0 20px;
+  }
+  
+  .menu1 {
+    width: 30%;
+    justify-content: flex-start;
+  }
+  
+  .menubetween {
+    width: 30%;
+  }
+  
+  .menu2 {
+    width: 40%;
+  }
+  
+  .menu2 ul {
+    gap: 20px;
+  }
+  
+  /* Main Section */
   .titlemain {
-    padding: 0 3%;
+    padding: 0 20px;
+    gap: 40px;
   }
   
   #vectorseta {
-    height: 200px;
-    right: 10%;
+    height: 180px;
+    right: 8%;
+    bottom: 25%;
   }
   
   #selfimg {
-    width: 350px;
-    height: 350px;
+    width: 320px;
+    height: 320px;
   }
   
   .text {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
   
+  .text h3 {
+    font-size: 1.3rem;
+  }
+  
+  /* About Me */
   .aboutme {
-    padding: 60px 3%;
+    padding: 60px 20px;
+    gap: 40px;
+  }
+  
+  .abouttext {
+    margin-left: 0;
+    padding-top: 0;
+    flex: 1;
   }
   
   #imgabout {
-    height: 350px;
+    height: 320px;
+    margin-right: 0;
+    margin-top: 0;
+  }
+  
+  /* Conhecimentos e Projetos */
+  .especialidades, .projetos {
+    padding: 60px 20px;
+  }
+  
+  .linguagens ul {
+    gap: 60px;
+  }
+  
+  .pomodoro, .pervias {
+    width: 320px;
+    height: 420px;
   }
 }
 
+/* TABLET PEQUENO / MOBILE LARGE (768px para baixo) */
 @media (max-width: 768px) {
+  /* Header */
   header {
+    flex-direction: row;
+    height: 70px;
+    padding: 0 15px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(34, 40, 49, 0.95);
+    backdrop-filter: blur(10px);
+  }
+  
+  .menu1 {
+    width: auto;
+    font-size: 1.3rem;
+  }
+  
+  .menubetween {
+    flex: 1;
+  }
+  
+  .menu2 {
+    width: auto;
+  }
+  
+  .menu2 ul {
+    gap: 15px;
+  }
+  
+  .menu2 a {
+    font-size: 0.9rem;
+  }
+  
+  /* Ajustar o main para compensar o header fixo */
+  main {
+    padding-top: 70px;
+  }
+  
+  /* Main Section */
+  .titlemain {
     flex-direction: column;
     height: auto;
-    padding: 1rem 3%;
-    gap: 1rem;
-  }
-
-  .menu1, .menubetween, .menu2 {
-    width: 100%;
-    justify-content: center;
-  }
-
-  .menu1 {
-    justify-content: center;
-  }
-
-  .menu2 ul {
-    flex-direction: row;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-
-  .titlemain {
-    flex-direction: column-reverse;
-    height: auto;
-    padding: 60px 3%;
-    gap: 40px;
+    min-height: calc(100vh - 70px);
+    padding: 40px 15px;
+    gap: 30px;
     text-align: center;
   }
-
+  
   #vectorseta {
     display: none;
   }
-
+  
   #selfimg {
     width: 280px;
     height: 280px;
+    order: -1;
   }
-
+  
   .text {
     font-size: 1.8rem;
+    align-items: center;
   }
-
+  
+  .text h1 {
+    text-align: center;
+  }
+  
   .text h3 {
-    font-size: 1.2rem;
-  }
-
-  .aboutme {
-    flex-direction: column;
-    padding: 60px 3%;
-    text-align: center;
-    gap: 40px;
-  }
-
-  .abouttext {
-    max-width: 100%;
-  }
-
-  #p2 {
-    text-align: center;
     font-size: 1.1rem;
   }
-
+  
+  /* About Me */
+  .aboutme {
+    flex-direction: column;
+    padding: 60px 15px;
+    text-align: center;
+    gap: 30px;
+  }
+  
+  .abouttext {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .about {
+    justify-content: center;
+    font-size: 2.2rem;
+  }
+  
+  #p2 {
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.6;
+  }
+  
   #imgabout {
-    margin: 0;
     width: 100%;
     max-width: 400px;
     height: auto;
   }
-
+  
+  /* Conhecimentos */
+  .especialidades, .projetos {
+    padding: 60px 15px;
+  }
+  
   .ttl-especialidades-projetos {
-    font-size: 2rem;
-    flex-direction: column;
+    font-size: 2.2rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
   }
-
+  
+  .especialidades p, .projetos p {
+    font-size: 1.1rem;
+    max-width: 500px;
+  }
+  
   .linguagens ul {
-    flex-direction: column;
+    flex-direction: row;
     gap: 40px;
+    flex-wrap: wrap;
   }
-
-  .pomodoro, .pervias, .globus {
+  
+  .linguagens ul li {
+    width: 120px;
+  }
+  
+  .linguagens ul li i p {
+    font-size: 1.2rem;
+  }
+  
+  /* Projetos */
+  .projetos .linguagens ul {
+    flex-direction: column;
+    gap: 30px;
+  }
+  
+  .pomodoro, .pervias {
     width: 100%;
     max-width: 400px;
     height: auto;
+    min-height: 400px;
     padding: 25px 20px;
   }
-
+  
+  .pomodoro img, .pervias img {
+    height: 160px;
+  }
+  
+  /* Footer */
   footer {
-    padding: 30px 3%;
+    padding: 40px 15px;
     margin-top: 60px;
+  }
+  
+  footer h2 {
+    font-size: 1.5rem;
+  }
+  
+  footer p {
+    font-size: 1rem;
   }
 }
 
+/* MOBILE (480px para baixo) */
 @media (max-width: 480px) {
+  /* Header */
+  header {
+    padding: 0 10px;
+    height: 60px;
+  }
+  
+  .menu1 h1 {
+    font-size: 1.2rem;
+  }
+  
+  .menu2 ul {
+    gap: 12px;
+  }
+  
+  .menu2 a {
+    font-size: 0.85rem;
+  }
+  
+  main {
+    padding-top: 60px;
+  }
+  
+  /* Main Section */
+  .titlemain {
+    min-height: calc(100vh - 60px);
+    padding: 30px 10px;
+    gap: 25px;
+  }
+  
+  #selfimg {
+    width: 220px;
+    height: 220px;
+  }
+  
   .text {
     font-size: 1.5rem;
   }
@@ -629,24 +794,132 @@ footer a:hover {
     font-size: 1rem;
   }
   
-  #selfimg {
-    width: 220px;
-    height: 220px;
+  /* About Me */
+  .aboutme {
+    padding: 50px 10px;
+    gap: 25px;
   }
   
   .about {
     font-size: 1.8rem;
   }
   
+  #p2 {
+    font-size: 0.95rem;
+  }
+  
+  #imgabout {
+    max-width: 300px;
+  }
+  
+  /* Conhecimentos e Projetos */
+  .especialidades, .projetos {
+    padding: 50px 10px;
+  }
+  
   .ttl-especialidades-projetos {
     font-size: 1.8rem;
   }
   
+  .especialidades p, .projetos p {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+  
+  .linguagens ul {
+    gap: 30px;
+  }
+  
+  .linguagens ul li {
+    width: 100px;
+  }
+  
+  .linguagens ul li i {
+    font-size: 3rem;
+  }
+  
+  .linguagens ul li i p {
+    font-size: 1rem;
+  }
+  
+  /* Projetos */
   .pomodoro, .pervias {
     padding: 20px 15px;
+    min-height: 380px;
   }
   
   .pomodoro img, .pervias img {
-    height: 150px;
+    height: 140px;
+  }
+  
+  .pomodoro h1, .pervias h1 {
+    font-size: 1.3rem;
+  }
+  
+  .pomodoro p, .pervias p {
+    font-size: 0.9rem;
+  }
+  
+  /* Footer */
+  footer {
+    padding: 30px 10px;
+    margin-top: 50px;
+  }
+  
+  footer h2 {
+    font-size: 1.3rem;
+  }
+  
+  footer p {
+    font-size: 0.9rem;
+  }
+}
+
+/* MOBILE MUITO PEQUENO (360px para baixo) */
+@media (max-width: 360px) {
+  /* Header */
+  .menu2 ul {
+    gap: 8px;
+  }
+  
+  .menu2 a {
+    font-size: 0.8rem;
+  }
+  
+  /* Main Section */
+  #selfimg {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .text {
+    font-size: 1.3rem;
+  }
+  
+  /* About Me */
+  .about {
+    font-size: 1.6rem;
+  }
+  
+  /* Conhecimentos */
+  .linguagens ul {
+    gap: 20px;
+  }
+  
+  .linguagens ul li {
+    width: 90px;
+  }
+  
+  .linguagens ul li i {
+    font-size: 2.5rem;
+  }
+  
+  /* Projetos */
+  .pomodoro, .pervias {
+    padding: 15px 12px;
+  }
+  
+  .pomodoro img, .pervias img {
+    height: 120px;
   }
 }
