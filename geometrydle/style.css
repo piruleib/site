@@ -226,6 +226,10 @@ span{
     font-family: aller, helvetica, arial;
 }
 
+.score-display{
+    display: none !important;
+}
+
 @media (max-width: 768px){
     .logo{
         height: 50px;
@@ -235,10 +239,6 @@ span{
     }
     .logo img{
         height: 50px;
-    }
-
-    .score-display{
-        display: none !important;
     }
 
     .boxes{
