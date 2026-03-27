@@ -36,6 +36,11 @@ p{
     color: white;
 }
 
+#downloads1, #downloads2{
+    font-family: aller, helvetica, arial;
+    font-size: 20px;
+}
+
 .welcome, .accwarni{
     display: flex;
     justify-content: center;
@@ -218,30 +223,27 @@ span{
 }
 
 @media (max-width: 768px){
+    .logo{
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .logo img{
+        height: 50px;
+    }
     .boxes{
         display: flex;
         justify-content: space-evenly;
         align-items: center;
+        flex-direction: column;
+    }
+    .boxes img{
+        height: 70px;
     }
     #box1, #box2{
         width: 300px;
-        height: 300px;
-        margin: 10px;
-    }
-    p{
-        text-align: center;
-    }
-}
-
-@media (max-width: 800px){
-    .boxes{
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-    #box1, #box2{
-        width: 400px;
-        height: 300px;
+        height: 190px;
         margin: 10px;
     }
     p{
