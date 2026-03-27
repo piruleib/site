@@ -236,6 +236,11 @@ span{
     .logo img{
         height: 50px;
     }
+
+    .score-display{
+        display: none !important;
+    }
+
     .boxes{
         display: flex;
         justify-content: space-evenly;
@@ -247,7 +252,7 @@ span{
     }
     #box1, #box2{
         width: 300px;
-        height: 250px;
+        height: 300px;
         margin: 10px;
     }
 
