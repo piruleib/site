@@ -199,6 +199,10 @@ function gameOver() {
 function reiniciarJogo() {
   score = 0;
   document.getElementById("scoreValue").innerText = score;
+
+  const screen = document.getElementById("gameOverScreen");
+  screen.classList.remove("active");
+
   carregarNovosNiveis();
 }
 
