@@ -191,39 +191,57 @@ span{
 }
 
 /* =======================
-   📱 MOBILE
+   FIX RESPONSIVO (SAFE)
 ======================= */
+
+/* evita quebrar layout horizontal */
+.boxes{
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* melhora centralização interna sem quebrar nada */
+#box1, #box2{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* imagem da dificuldade */
+#diff1, #diff2{
+    height: 70px;
+    margin-bottom: 10px;
+}
+
+/* 📱 MOBILE */
 @media (max-width: 768px){
 
     .boxes{
-        flex-direction: column; /* 🔥 STACK */
+        flex-direction: column; /* empilha */
     }
 
     #box1, #box2{
         width: 90%;
-        height: 250px;
+        height: 260px;
     }
 
     span{
-        font-size: 20px;
+        font-size: 22px;
     }
 
     .welcome, .accwarni{
         height: auto;
+        padding: 15px;
+        text-align: center;
         font-size: 16px;
-        padding: 20px;
     }
 
     .logo img{
         height: 50px;
     }
 
-    #diff1, #diff2{
-        height: 60px;
-    }
-
     .score-display{
-        font-size: 16px;
-        padding: 8px 14px;
+        font-size: 18px;
     }
 }
