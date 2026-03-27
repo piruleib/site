@@ -15,146 +15,137 @@
 
 body {
     background-image: linear-gradient(#0065FD, #002E73);
-    height: 100vh;
-    background-position: center center;
+    min-height: 100vh; /* 🔥 melhor que height fixa */
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
 }
 
+/* LOGO */
 .logo{
     display: flex;
     justify-content: center;
     align-items: center;
-    img{
-        height: 70px;
-    }
 }
 
+.logo img{
+    height: 70px;
+}
+
+/* TEXTO */
 p{
     font-family: aller, helvetica, arial;
     color: white;
 }
 
+/* TOP TEXT */
 .welcome, .accwarni{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: row;
     height: 20vh;
     font-size: 20px;
+    text-align: center;
+    padding: 0 20px;
 }
 
+/* BOXES CONTAINER */
 .boxes{
     display: flex;
-    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap; /* 🔥 ESSENCIAL */
 }
 
+/* BOX */
 .box{
     display: flex;
     flex-direction: column;
-    transition: all 0.3s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.25s ease;
     font-family: pusab;
     color: white;
-}
-
-.box:hover{
-    transform: scale(1.1);
     cursor: pointer;
 }
 
-span{
-    font-size: 30px;
-    margin-bottom: 20px;
-    text-align: center;
+.box:hover{
+    transform: scale(1.05);
 }
 
+/* BOX VISUAL */
 #box1, #box2{
     background-color: var(--box_brown);
     width: 400px;
     height: 400px;
     border-radius: 20px;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
+/* TEXTO DOS LEVELS */
+span{
+    font-size: 28px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/* DIFICULDADE IMG */
+#diff1, #diff2{
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+/* CREDITS */
 .credits{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 10vh;
+    height: auto;
     flex-direction: column;
-    font-size: 15px;
-    a{
-        color: yellow;
-    }
+    font-size: 14px;
+    padding: 20px;
+    text-align: center;
 }
 
-#gameover {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    color: white;
-    font-size: 2rem;
-    text-align: center;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
+.credits a{
+    color: yellow;
+}
 
+/* SCORE */
 .score-display {
     position: fixed;
     top: 20px;
     right: 20px;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: bold;
     color: #fff;
     background: rgba(0, 0, 0, 0.7);
-    padding: 10px 20px;
+    padding: 10px 18px;
     border-radius: 10px;
     z-index: 100;
 }
 
+/* LOADING */
 .loading-screen {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0, 0, 0, 0.9);
     color: white;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 1001;
     font-size: 24px;
 }
 
-.score-display {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 24px;
-    font-weight: bold;
-    color: #fff;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px 20px;
-    border-radius: 10px;
-    z-index: 100;
-}
-
+/* GAME OVER */
 .game-over-screen {
     display: none;
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: rgba(0, 0, 0, 0.9);
     color: white;
     z-index: 1000;
@@ -169,29 +160,29 @@ span{
     border-radius: 15px;
     border: 2px solid #ff4444;
     max-width: 400px;
-    width: 80%;
+    width: 85%;
 }
 
 .game-over-content h2 {
     color: #ff4444;
-    font-size: 36px;
+    font-size: 32px;
     margin-bottom: 20px;
 }
 
 .game-over-content p {
-    font-size: 24px;
-    margin-bottom: 30px;
+    font-size: 22px;
+    margin-bottom: 25px;
 }
 
 .restart-btn {
     background: #ff4444;
     color: white;
     border: none;
-    padding: 15px 30px;
+    padding: 14px 28px;
     font-size: 18px;
     border-radius: 8px;
     cursor: pointer;
-    transition: background 0.3s ease;
+    transition: 0.3s;
 }
 
 .restart-btn:hover {
@@ -199,52 +190,40 @@ span{
     transform: scale(1.05);
 }
 
-.box {
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.box:hover {
-    transform: scale(1.02);
-}
-
-.box {
-    cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.box:hover {
-    transform: scale(1.02);
-}
-
+/* =======================
+   📱 MOBILE
+======================= */
 @media (max-width: 768px){
-    .boxes{
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-    }
-    #box1, #box2{
-        width: 300px;
-        height: 300px;
-        margin: 10px;
-    }
-    p{
-        text-align: center;
-    }
-}
 
-@media (max-width: 800px){
     .boxes{
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
+        flex-direction: column; /* 🔥 STACK */
     }
+
     #box1, #box2{
-        width: 400px;
-        height: 300px;
-        margin: 10px;
+        width: 90%;
+        height: 250px;
     }
-    p{
-        text-align: center;
+
+    span{
+        font-size: 20px;
+    }
+
+    .welcome, .accwarni{
+        height: auto;
+        font-size: 16px;
+        padding: 20px;
+    }
+
+    .logo img{
+        height: 50px;
+    }
+
+    #diff1, #diff2{
+        height: 60px;
+    }
+
+    .score-display{
+        font-size: 16px;
+        padding: 8px 14px;
     }
 }
