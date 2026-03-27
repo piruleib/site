@@ -49,7 +49,7 @@ async function carregarDadosIniciais() {
         .then(data => ({
   name: data.name || "Unknown",
   downloads: Number(data.downloads) || 0,
-  difficulty: Number(data.difficulty),
+  difficulty: data.difficulty,
   demon: data.demon,
   demonDifficulty: Number(data.demonDifficulty),
   stars: Number(data.stars) || 0
@@ -89,15 +89,15 @@ async function carregarDadosIniciais() {
 }
 
 function getDifficultyImage(level) {
-  const diff = String(level.difficulty).toLowerCase();
+  const diff = String(level.difficulty || "").toLowerCase();
 
   // ⭐ AUTO
   if (level.stars == 1 || diff.includes("auto")) {
     return "img/auto.png";
   }
 
-  // 😈 DEMONS
-  if (diff.includes("demon")) {
+  // 😈 DEMON (usa flag também)
+  if (level.demon || diff.includes("demon")) {
     if (diff.includes("easy")) return "img/demon-easy.png";
     if (diff.includes("medium")) return "img/demon-medium.png";
     if (diff.includes("hard")) return "img/demon-hard.png";
@@ -199,6 +199,10 @@ function gameOver() {
 function reiniciarJogo() {
   score = 0;
   document.getElementById("scoreValue").innerText = score;
+
+  const screen = document.getElementById("gameOverScreen");
+  screen.classList.remove("active");
+
   carregarNovosNiveis();
 }
 
