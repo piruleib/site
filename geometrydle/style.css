@@ -144,13 +144,10 @@ span{
 /* GAME OVER */
 .game-over-screen {
     display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.9);
-    color: white;
-    z-index: 1000;
-    justify-content: center;
-    align-items: center;
+}
+
+.game-over-screen.active {
+    display: flex !important;
 }
 
 .game-over-content {
