@@ -1,231 +1,215 @@
-// Hi! This is all manual, as specified on the index, i tried to use Colon's API but its rate limit is too strict.
-// So I manually verified a few levels and put them in a database here. At least until i discover how do i make requests directly to RobTop's servers.
-// Enjoy the game!
-// BRASIL ON TOP!
-// By the way, some variable names are in portuguese, sorry about that.
-// devpiruleib
+// If you're here, you're a gossip ahh.
+// This website uses GD Colon's API to get the level's informations. Then, it stores locally so it makes only one request and stores it to the cache, so the site makes the less possible calls and it prevents rate limiting.
+// I know Colon doesn't recommend the use of his API, but it's the easiest way to get the informations for the front-end, so i had no choice.
+// (colon please keep the API alive i beg)
+
+
+
+
+// =======================
+// CONFIG
+// =======================
+const CACHE_KEY = "gd_levels_cache";
+const CACHE_TIME_KEY = "gd_levels_cache_time";
+const CACHE_DURATION = 1000 * 60 * 60 * 24; // 24h
 
 let nivel1Data = null;
 let nivel2Data = null;
 let score = 0;
-let currentLevels = [];
 let allLevelsData = null;
 
-// MANUALLY VERIFIED LEVEL DATA - MAY NOT BE ACCURATE :(
-const levelsDatabase = { 
-    10565740: { name: "Bloodbath", downloads: 112000000, difficulty: 9 },
-    3979721: { name: "Cataclysm", downloads: 53000000, difficulty: 9 },
-    60979746: { name: "The Golden", downloads: 3300000, difficulty: 9 },
-    2760100: { name: "ToE II v2", downloads: 5500000, difficulty: 7 },
-    4706930: { name: "Supersonic", downloads: 39100000, difficulty: 8 },
-    61079355: { name: "Acu", downloads: 7700000, difficulty: 9 },
-    44062068: { name: "Future Funk", downloads: 21889588, difficulty: 7 },
-    9145341: { name: "8o", downloads: 17300000, difficulty: 8 },
-    38754426: { name: "Killbot", downloads: 2800000, difficulty: 9 },
-    4957691: { name: "Windy Landscape", downloads: 13700000, difficulty: 8 },
-    75206202: { name: "Firework", downloads: 3700000, difficulty: 9 },
-    61137742: { name: "Leyak", downloads: 1800000, difficulty: 8 },
-    9608518: { name: "Butterfly Effect", downloads: 937510, difficulty: 5 },
-    5904109: { name: "Platinum Adventure", downloads: 52400000, difficulty: 5 },
-    34085027: { name: "B", downloads: 16300000, difficulty: 6 },
-    13519: { name: "The Nightmare", downloads: 119000000, difficulty: 5 },
-    55520: { name: "The Lightning Road", downloads: 74100000, difficulty: 5 },
-    76962930: { name: "Sakupen Circles", downloads: 6847563, difficulty: 9 },
-    1347537: { name: "Invisible Clubstep", downloads: 14600000, difficulty: 5 },
-    17235008: { name: "X", downloads: 51600000, difficulty: 5 },
-    25706351: { name: "HeLL", downloads: 11000000, difficulty: 6 },
-    27690100: { name: "Slaughterhouse", downloads: 26700000, difficulty: 9 },
-    8660411: { name: "Death Moon", downloads: 46200000, difficulty: 5 },
-    40299716: { name: "Spectral Tentation", downloads: 401000, difficulty: 8 },
-    73667628: { name: "Acheron", downloads: 6500000, difficulty: 9 },
-    71912451: { name: "RUST", downloads: 785000, difficulty: 9 },
-    4284013: { name: "Nine Circles", downloads: 72800000, difficulty: 7 },
-    5310094: { name: "Fairydust", downloads: 9000000, difficulty: 7 },
-    3543219: { name: "Speed Racer", downloads: 54200000, difficulty: 5 },
-    6939821: { name: "Jawbreaker (Zenthic)", downloads: 15300000, difficulty: 7 },
-    102765: { name: "Hextec Flow", downloads: 12300000, difficulty: 5 },
-    59315849: { name: "Double Dash", downloads: 779348, difficulty: 7 },
-    13643591: { name: "Ultra Drivers", downloads: 1785129, difficulty: 7 },
-    26681070: { name: "Sonic Wave", downloads: 33500000, difficulty: 9 }
-};
+// IDs dos levels que você quer usar
+const allLevelIds = [
+  10565740, 3979721, 60979746, 4706930, 44062068,
+  13519, 55520, 27690100, 26681070
+];
 
-// Convert to array for easy random selection
-const allLevelIds = Object.keys(levelsDatabase).map(Number);
+// =======================
+// API + CACHE
+// =======================
+async function carregarDadosIniciais() {
+  const cache = localStorage.getItem(CACHE_KEY);
+  const cacheTime = localStorage.getItem(CACHE_TIME_KEY);
+  const agora = Date.now();
 
-// Difficulty to image mapping
-const difficultyImages = {
-  'Extreme Demon': 'img/demon-extreme.png',
-  'Insane Demon': 'img/demon-insane.png',
-  'Hard Demon': 'img/demon-hard.png',
-  'Medium Demon': 'img/demon-medium.png',
-  'Easy Demon': 'img/demon-easy.png',
-  'Hard': 'img/hard.png',
-  'Insane': 'img/insane.png',
-  'Easy': 'img/easy.png',
-  'Normal': 'img/normal.png',
-  'Auto': 'img/auto.png',
-  'Demon': 'img/demon.png'
-};
-
-const defaultImage = 'img/demon-extreme.png';
-
-function getDifficultyImage(difficulty) {
-  if (typeof difficulty === 'number') {
-    const difficultyMap = {
-      0: difficultyImages['Auto'],
-      1: difficultyImages['Easy'],
-      2: difficultyImages['Normal'],
-      3: difficultyImages['Hard'],
-      4: difficultyImages['Insane'],
-      5: difficultyImages['Easy Demon'],
-      6: difficultyImages['Medium Demon'],
-      7: difficultyImages['Hard Demon'],
-      8: difficultyImages['Insane Demon'],
-      9: difficultyImages['Extreme Demon'],
-      10: difficultyImages['Auto']
-    };
-    return difficultyMap[difficulty] || defaultImage;
+  // ✅ usa cache
+  if (cache && cacheTime && agora - cacheTime < CACHE_DURATION) {
+    console.log("Usando cache...");
+    allLevelsData = JSON.parse(cache);
+    initializeGame();
+    return;
   }
-  return defaultImage;
+
+  console.log("Buscando API...");
+
+  try {
+    const promises = allLevelIds.map(id =>
+      fetch(`https://gdbrowser.com/api/level/${id}`)
+        .then(res => res.json())
+        .then(data => ({
+  name: data.name || "Unknown",
+  downloads: Number(data.downloads) || 0,
+  difficulty: Number(data.difficulty),
+  demon: data.demon,
+  demonDifficulty: Number(data.demonDifficulty),
+  stars: Number(data.stars) || 0
+}))
+        .catch(() => null)
+    );
+
+    // timeout
+    const timeout = new Promise(resolve =>
+      setTimeout(() => resolve("timeout"), 5000)
+    );
+
+    const results = await Promise.race([
+      Promise.all(promises),
+      timeout
+    ]);
+
+    if (results === "timeout") {
+      console.error("API demorou demais.");
+      return;
+    }
+
+    // remove nulls
+    allLevelsData = results.filter(r => r !== null);
+
+    // salva cache
+    localStorage.setItem(CACHE_KEY, JSON.stringify(allLevelsData));
+    localStorage.setItem(CACHE_TIME_KEY, agora);
+
+    console.log("Dados carregados:", allLevelsData);
+
+    initializeGame();
+
+  } catch (err) {
+    console.error("Erro na API:", err);
+  }
 }
 
-// Get level data from our verified database
-function getLevelData(id) {
-    return levelsDatabase[id] || {
-        name: `Level ${id}`,
-        downloads: Math.floor(Math.random() * 1000000) + 100000,
-        difficulty: Math.floor(Math.random() * 10),
-        author: "Unknown"
-    };
+function getDifficultyImage(level) {
+  const diff = String(level.difficulty).toLowerCase();
+
+  // ⭐ AUTO
+  if (level.stars == 1 || diff.includes("auto")) {
+    return "img/auto.png";
+  }
+
+  // 😈 DEMONS
+  if (diff.includes("demon")) {
+    if (diff.includes("easy")) return "img/demon-easy.png";
+    if (diff.includes("medium")) return "img/demon-medium.png";
+    if (diff.includes("hard")) return "img/demon-hard.png";
+    if (diff.includes("insane")) return "img/demon-insane.png";
+    if (diff.includes("extreme")) return "img/demon-extreme.png";
+    return "img/demon.png";
+  }
+
+  // 🎯 NORMAL
+  if (diff.includes("easy")) return "img/easy.png";
+  if (diff.includes("normal")) return "img/normal.png";
+  if (diff.includes("harder")) return "img/harder.png";
+  if (diff.includes("hard")) return "img/hard.png";
+  if (diff.includes("insane")) return "img/insane.png";
+
+  return "img/normal.png";
 }
 
-// Initialize game - NO API CALLS!
+// =======================
+// GAME LOGIC
+// =======================
 function initializeGame() {
-    const loadingScreen = document.getElementById('loadingScreen');
-    
-    // Convert database to array for random selection
-    allLevelsData = Object.values(levelsDatabase);
-    
-    console.log(`Game loaded with ${allLevelsData.length} verified levels!`);
-    console.log('No API calls - 100% accurate data!');
-    
-    // Hide loading screen immediately
-    loadingScreen.style.display = 'none';
-    
-    // Start the game
-    startGame();
+  document.getElementById("loadingScreen").style.display = "none";
+  startGame();
 }
 
 function startGame() {
-    carregarNovosNiveis();
+  carregarNovosNiveis();
 }
 
-// Choose random levels from our pre-loaded data
 function escolherNiveisAleatorios() {
-    if (!allLevelsData || allLevelsData.length < 2) {
-        // Fallback to random IDs
-        const indice1 = Math.floor(Math.random() * allLevelIds.length);
-        let indice2;
-        do {
-            indice2 = Math.floor(Math.random() * allLevelIds.length);
-        } while (indice1 === indice2);
-        
-        return [
-            getLevelData(allLevelIds[indice1]),
-            getLevelData(allLevelIds[indice2])
-        ];
-    }
+  if (!allLevelsData || allLevelsData.length < 2) {
+    console.error("Sem dados suficientes!");
+    return [];
+  }
 
-    const indice1 = Math.floor(Math.random() * allLevelsData.length);
-    let indice2;
-    do {
-        indice2 = Math.floor(Math.random() * allLevelsData.length);
-    } while (indice1 === indice2);
+  const i1 = Math.floor(Math.random() * allLevelsData.length);
+  let i2;
 
-    return [allLevelsData[indice1], allLevelsData[indice2]];
+  do {
+    i2 = Math.floor(Math.random() * allLevelsData.length);
+  } while (i1 === i2);
+
+  return [allLevelsData[i1], allLevelsData[i2]];
 }
 
-// Load new levels - NO API CALLS!
 function carregarNovosNiveis() {
-    const [nivel1, nivel2] = escolherNiveisAleatorios();
-    setupLevels(nivel1, nivel2);
+  const levels = escolherNiveisAleatorios();
+  if (levels.length < 2) return;
+
+  setupLevels(levels[0], levels[1]);
 }
 
-function setupLevels(nivel1, nivel2) {
-    nivel1Data = nivel1;
-    nivel2Data = nivel2;
-    currentLevels = [nivel1, nivel2];
-    
-    console.log("Setting up levels (100% accurate data):");
-    console.log("Level 1:", nivel1.name, "Downloads:", nivel1.downloads, "Difficulty:", nivel1.difficulty);
-    console.log("Level 2:", nivel2.name, "Downloads:", nivel2.downloads, "Difficulty:", nivel2.difficulty);
-    
-    document.getElementById("levelname1").innerText = nivel1.name;
-    document.getElementById("levelname2").innerText = nivel2.name;
-    document.getElementById("downloads1").innerText = "? downloads";
-    document.getElementById("downloads2").innerText = "? downloads";
-    
-    const img1 = document.querySelector("#box1 img");
-    const img2 = document.querySelector("#box2 img");
-    
-    img1.src = getDifficultyImage(nivel1.difficulty);
-    img2.src = getDifficultyImage(nivel2.difficulty);
-    
-    document.getElementById("gameOverScreen").style.display = "none";
+function setupLevels(n1, n2) {
+  nivel1Data = n1;
+  nivel2Data = n2;
+
+  document.getElementById("levelname1").innerText = n1.name;
+  document.getElementById("levelname2").innerText = n2.name;
+
+  document.getElementById("downloads1").innerText = "? downloads";
+  document.getElementById("downloads2").innerText = "? downloads";
+
+  document.getElementById("diff1").src = getDifficultyImage(n1);
+document.getElementById("diff2").src = getDifficultyImage(n2);
+
+  document.getElementById("gameOverScreen").style.display = "none";
 }
 
-function verificarResposta(nivelEscolhido) {
-    if (!nivel1Data || !nivel2Data) return;
-    
-    const downloads1 = nivel1Data.downloads;
-    const downloads2 = nivel2Data.downloads;
-    
-    document.getElementById("downloads1").innerText = `${downloads1.toLocaleString()} downloads`;
-    document.getElementById("downloads2").innerText = `${downloads2.toLocaleString()} downloads`;
-    
-    let acertou = false;
-    
-    if (nivelEscolhido === 1 && downloads1 > downloads2) {
-        acertou = true;
-    } else if (nivelEscolhido === 2 && downloads2 > downloads1) {
-        acertou = true;
-    } else if (downloads1 === downloads2) {
-        acertou = true;
-    }
-    
-    if (acertou) {
-        score++;
-        document.getElementById("scoreValue").innerText = score;
-        setTimeout(() => {
-            carregarNovosNiveis();
-        }, 1500);
-    } else {
-        gameOver();
-    }
+function verificarResposta(escolha) {
+  const d1 = Number(nivel1Data.downloads) || 0;
+  const d2 = Number(nivel2Data.downloads) || 0;
+
+  document.getElementById("downloads1").innerText =
+    d1 ? d1.toLocaleString() + " downloads" : "No data";
+
+  document.getElementById("downloads2").innerText =
+    d2 ? d2.toLocaleString() + " downloads" : "No data";
+
+  const acertou =
+    (escolha === 1 && d1 > d2) ||
+    (escolha === 2 && d2 > d1) ||
+    d1 === d2;
+
+  if (acertou) {
+    score++;
+    document.getElementById("scoreValue").innerText = score;
+    setTimeout(carregarNovosNiveis, 1500);
+  } else {
+    gameOver();
+  }
 }
 
 function gameOver() {
-    document.getElementById("finalScore").innerText = score;
-    document.getElementById("gameOverScreen").style.display = "flex";
+  document.getElementById("finalScore").innerText = score;
+  document.getElementById("gameOverScreen").style.display = "flex";
 }
 
 function reiniciarJogo() {
-    score = 0;
-    document.getElementById("scoreValue").innerText = score;
-    document.getElementById("gameOverScreen").style.display = "none";
-    carregarNovosNiveis();
+  score = 0;
+  document.getElementById("scoreValue").innerText = score;
+  carregarNovosNiveis();
 }
 
-// Event listeners
-document.getElementById("box1").addEventListener("click", () => {
-    verificarResposta(1);
-});
+// =======================
+// EVENTS
+// =======================
+document.getElementById("box1").onclick = () => verificarResposta(1);
+document.getElementById("box2").onclick = () => verificarResposta(2);
+document.getElementById("restartButton").onclick = reiniciarJogo;
 
-document.getElementById("box2").addEventListener("click", () => {
-    verificarResposta(2);
-});
-
-document.getElementById("restartButton").addEventListener("click", reiniciarJogo);
-
-// Start the game - INSTANT LOADING!
-initializeGame();
+// =======================
+// START
+// =======================
+carregarDadosIniciais();
