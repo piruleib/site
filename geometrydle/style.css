@@ -41,13 +41,33 @@ p{
     font-size: 20px;
 }
 
-.welcome, .accwarni{
+.welcome{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: row;
     height: 20vh;
     font-size: 20px;
+}
+
+.accwarni{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    h4{
+        font-family: aller, helvetica, arial;
+        font-weight: normal;
+        color: white;
+    }
+}
+
+.accwarni h1{
+    font-family: pusab;
+    font-weight: normal;
+    color: red;
+    font-size: 50px;
 }
 
 .boxes{
