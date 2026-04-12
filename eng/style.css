@@ -244,11 +244,15 @@ span {
         align-items: flex-start;
         padding-top: 0.5rem;
     }
+
+    #taskbar{
+        display: none;
+    }
  
     .xp-window {
         width: 96vw;
         height: calc(100dvh - 40px); /* leave room for taskbar */
-        margin-bottom: 30px;
+        margin-bottom: 0px;
         border-radius: 8px;
     }
  
