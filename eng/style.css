@@ -239,6 +239,9 @@ span {
    RESPONSIVE — Mobile (≤ 600px)
    ============================================= */
 @media (max-width: 600px) {
+    body{
+        overflow-y: none;
+    }
     .xp-wrapper {
         padding: 0.5rem;
         align-items: flex-start;
