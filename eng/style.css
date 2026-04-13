@@ -435,6 +435,16 @@
             }
         }
 
+        #startbtn{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #xpvideo{
+            display: none;
+        }
+
         /* =============================================
            Extra Small (≤ 280px) - emergência
         ============================================= */

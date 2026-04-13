@@ -10,12 +10,14 @@ setInterval(() => {
   contador_transicao++;
   transicao();
   console.log(contador_transicao);
-   if(contador_transicao == 1){
-    xpvideo.play();
-  }
 }, 1000);
 
- 
+startbtn.addEventListener("click", () => {
+  xpvideo.style.display = "block";
+  xpvideo.play();
+  startbtn.style.display = "none";
+}
+);
 
 function transicao(){
     if(contador_transicao == 14){
