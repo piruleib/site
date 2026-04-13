@@ -6,16 +6,17 @@ let xpvideo = document.getElementById("xpvideo");
 let skipbtn = document.getElementById("skipbtn");
 
 
-setInterval(() => {
-  contador_transicao++;
-  transicao();
-  console.log(contador_transicao);
-}, 1000);
+
 
 startbtn.addEventListener("click", () => {
   xpvideo.style.display = "block";
   xpvideo.play();
   startbtn.style.display = "none";
+  setInterval(() => {
+  contador_transicao++;
+  transicao();
+  console.log(contador_transicao);
+}, 1000);
 }
 );
 
