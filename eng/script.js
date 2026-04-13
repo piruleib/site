@@ -2,16 +2,23 @@ let contador_transicao = 0;
 let carregamento = document.getElementById("carregamento");
 let principal = document.getElementById("principal");
 let xpaudio = document.getElementById("xpaudio");
+let xpvideo = document.getElementById("xpvideo");
 let skipbtn = document.getElementById("skipbtn");
+
 
 setInterval(() => {
   contador_transicao++;
   transicao();
   console.log(contador_transicao);
+   if(contador_transicao == 1){
+    xpvideo.play();
+  }
 }, 1000);
 
+ 
+
 function transicao(){
-    if(contador_transicao == 13){
+    if(contador_transicao == 14){
     carregamento.style.display = "none";
     principal.style.display = "flex";
     principal.className = "principalnormal";

@@ -321,9 +321,6 @@
             }
         }
 
-        #ifmobile {
-            display: none;
-        }
         /* =============================================
            RESPONSIVE — Mobile Portrait (320px - 480px)
         ============================================= */
@@ -332,9 +329,6 @@
                 overflow: hidden;
             }
 
-            #ifmobile{
-                display: block;
-            }
             
             .xp-wrapper {
                 padding: 8px;
@@ -400,9 +394,6 @@
            RESPONSIVE — Very Small (≤ 360px)
         ============================================= */
         @media (max-width: 360px) {
-            #ifmobile{
-                display: block;
-            }
 
             .xp-wrapper {
                 padding: 5px;
@@ -448,9 +439,6 @@
            Extra Small (≤ 280px) - emergência
         ============================================= */
         @media (max-width: 280px) {
-            #ifmobile{
-                display: block;
-            }
             .xp-content h1 {
                 font-size: 18px !important;
             }
