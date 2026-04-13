@@ -321,12 +321,19 @@
             }
         }
 
+        #ifmobile {
+            display: none;
+        }
         /* =============================================
            RESPONSIVE — Mobile Portrait (320px - 480px)
         ============================================= */
         @media (max-width: 480px) {
             body {
                 overflow: hidden;
+            }
+
+            #ifmobile{
+                display: block;
             }
             
             .xp-wrapper {
@@ -362,12 +369,12 @@
             }
             
             .xp-content h1 {
-                font-size: 26px !important;
+                font-size: 32px !important;
                 margin-bottom: 12px;
             }
             
             .xp-content h3 {
-                font-size: 14px !important;
+                font-size: 22px !important;
                 line-height: 1.5;
                 margin-bottom: 10px;
             }
@@ -393,6 +400,10 @@
            RESPONSIVE — Very Small (≤ 360px)
         ============================================= */
         @media (max-width: 360px) {
+            #ifmobile{
+                display: block;
+            }
+
             .xp-wrapper {
                 padding: 5px;
                 height: calc(100vh - 28px);
@@ -437,6 +448,9 @@
            Extra Small (≤ 280px) - emergência
         ============================================= */
         @media (max-width: 280px) {
+            #ifmobile{
+                display: block;
+            }
             .xp-content h1 {
                 font-size: 18px !important;
             }
